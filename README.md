@@ -1,16 +1,18 @@
 Pi.Demo	
 ========
 
-Connects the Adafruit 16-channel PWM/Servo Shield (PCA9685) to the Raspberry Pi via i2c. 
-Demonstrates the use of mono & c# to control a servo, stepper and 9V DC motor.
+Connects the [Adafruit 16-channel PWM/Servo Shield](http://www.adafruit.com/products/1411) (PCA9685) to the Raspberry Pi via i2c. 
+
+Demonstrates the use of mono & c# to control a servo, stepper and 9V DC motor from the Raspberry Pi.
 
 The project uses:
-- [Raspberry Sharp IO](https://github.com/raspberry-sharp/raspberry-sharp-io) for i2c comms.
-- [PCA9685](https://github.com/neutmute/RPi.Demo/blob/master/Datasheets/PCA9685_PWM.pdf?raw=true)
-- SN754410 quadruple half-H driver for bidirectional DC motor control
-- 28BJY-48 5V stepper
-- ULN2003A darlington array IC to drive the stepper
 
+
+- [PCA9685](https://github.com/neutmute/RPi.Demo/blob/master/Datasheets/PCA9685_PWM.pdf?raw=true) 16-channel, 12-bit PWM Fm+ I2C-bus LED controller
+- [Raspberry Sharp IO](https://github.com/raspberry-sharp/raspberry-sharp-io) for i2c comms
+- [SN754410](https://github.com/neutmute/RPi.Demo/blob/master/Datasheets/SN754410.pdf?raw=true) quadruple half-H driver for bidirectional DC motor control
+- [28BJY-48](https://github.com/neutmute/RPi.Demo/blob/master/Datasheets/28BYJ-48_Stepper.pdf?raw=true)  5V stepper
+- [ULN2003A](https://github.com/neutmute/RPi.Demo/blob/master/Datasheets/ULN2003A.pdf?raw=true) darlington array IC to drive the stepper
 
 ![Circuit Diagram](http://raw.github.com/neutmute/RPi.Demo/master/RPi.Slides/Content/slides/circuit2.gif)
 
