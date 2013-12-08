@@ -1,0 +1,318 @@
+﻿@using RPi.Slides.Controllers
+@{
+    ViewBag.Title = "Raspberry Pi and Pulse Width Modulation";
+    Layout = "~/Views/Shared/_DeckJsLayout.cshtml";
+}
+
+<section class="slide">
+    <div>
+        <h2>Pulse Width Modulation</h2>
+        <h2>with the Raspberry Pi</h2>
+    </div>
+</section>
+<section class="slide">
+    <h3>Raspberry Pi</h3>
+    <img src="@Url.Content("~/Content/slides/RaspberryPi.jpg")" alt="Raspberry Pi">
+    <p class="slide">~$45 Single-board computer</p>
+    <p class="slide">Linux</p>
+</section>
+<section class="slide">
+    <h2>Pi Layout</h2>
+    <img src="@Url.Content("~/Content/slides/RaspberryPiLayout.jpg")" alt="Raspberry Pi">
+</section>
+<section class="slide">
+    <h2>1080p capable</h2>
+    <img src="@Url.Content("~/Content/slides/raspbmc.jpg")" alt="Raspberry Pi">
+</section>
+<section class="slide">
+    <h2>GPIO</h2>
+    <img src="@Url.Content("~/Content/slides/cobbler.jpg")">
+    <p>General Purpose Input Output</p>
+</section>
+<section class="slide">
+    <h2>Pulse Width Modulation</h2>
+    <img src="@Url.Content("~/Content/slides/pwm.jpg")">
+</section>
+<section class="slide">
+    <h3>Pi GPIO + PWM</h3>
+    <img src="@Url.Content("~/Content/slides/piPwm.jpg")">
+    <h3 class="slide">Awesome!</h3>
+    <h3 class="slide">OK, not really.</h3>
+</section>
+
+<section class="slide">
+    <h2>GPIO is limited</h2>
+    <img src="@Url.Content("~/Content/slides/gpio-pinout.jpg")">
+    <p class="slide">26 pin header</p>
+    <p class="slide">8 GPIO</p>
+    <p class="slide">1 hardware clocked PWM pin </p>
+</section>
+
+<section class="slide">
+    <h3>PCA9685: 16-channel, 12-bit PWM I2C-bus LED controller</h3>
+    <img src="@Url.Content("~/Content/slides/pwmBoard2.jpg")">
+    <p class="slide">16 channels (LEDs)</p>
+    <p class="slide">12 bit = 2<sup>12</sup> = 4096 pulse resolution</p>
+    <p class="slide">i2c = Inter-Integrated Circuit, 2 pin serial bus</p>
+    @*<p class="slide">2<sup>6</sup> address lines = 64 - 2 reserved = 62 addresses</p>*@
+
+    <h3 class="slide">Awesome!</h3>
+    <h3 class="slide">OK, not really.</h3>
+</section>
+
+<section class="slide">
+    <h2>Pi + PWM + Motors</h2>
+    <img src="@Url.Content("~/Content/slides/dcmotor.gif")">
+    <h2 class="slide">Better!</h2>
+</section>
+
+<section class="slide">
+    <h2>DC Motor</h2>
+    <img src="@Url.Content("~/Content/slides/technic-mini-motor-9v.gif")">
+</section>
+
+<section class="slide">
+    <h2>Servo</h2>
+    <img src="@Url.Content("~/Content/slides/hxt9002.gif")">
+</section>
+
+<section class="slide">
+    <h2>Stepper</h2>
+    <img src="@Url.Content("~/Content/slides/stepper2.gif")">
+</section>
+
+<section class="slide">
+    <h2>Using PWM for Motors</h2>
+    <ul>
+        <li class="slide">
+
+            <h3>DC Motor</h3>
+            <p>Speed control</p>
+        </li>
+        <li class="slide">
+
+            <h3>Servo</h3>
+            <p>PWM pulse train controls position</p>
+        </li>
+        <li class="slide">
+
+            <h3>Stepper</h3>
+            <p>No PWM but requires 4 channels</p>
+        </li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>DC Motor</h2>
+    <p>High startup current</p>
+    <p>Requires IC to switch power</p>
+    <img  src="@Url.Content("~/Content/slides/sn754410-connections.jpg")">
+</section>
+
+<section class="slide">
+    <h2>DC Motor</h2>
+    <p>SN754410 driver allows bi-directional control </p>
+    <img src="@Url.Content("~/Content/slides/HBridgeTable.gif")">
+</section>
+<section class="slide">
+    <h2>Servo</h2>
+    <p>Directly coupled to PWM</p>
+    <p>5-7V</p>
+    <img src="@Url.Content("~/Content/slides/servo_rc_pwm.jpg")">
+    
+</section>
+<section class="slide">
+    <h2>Stepper</h2>
+    <p>4 control lines</p>
+    <p>ULN2003 driver IC</p>
+    <img src="@Url.Content("~/Content/slides/uln2003.gif")">
+</section>
+<section class="slide">
+    <h2>Stepper</h2>
+    <p>Requires correct sequence to step rotor </p>
+    <p>Reduction gearbox</p>
+    <img src="@Url.Content("~/Content/slides/stepperSequence.gif")">
+</section>
+
+<section class="slide">
+    <h2>Circuit Diagram</h2>
+    <img src="@Url.Content("~/Content/slides/circuit2.gif")">
+</section>
+
+<section class="slide">
+    <h2>Breadboard</h2>
+    <img src="@Url.Content("~/Content/slides/bb.jpg")">
+</section>
+<section class="slide">
+    <h2>Breadboard - UBEC</h2>
+    <img src="@Url.Content("~/Content/slides/bb_ubec.png")">
+</section>
+<section class="slide">
+    <h2>Breadboard - i2c</h2>
+    <img src="@Url.Content("~/Content/slides/bb_i2c.png")">
+</section>
+
+<section class="slide">
+    <h2>Breadboard - Stepper</h2>
+    <img src="@Url.Content("~/Content/slides/bb_stepper.png")">
+</section>
+<section class="slide">
+    <h2>Breadboard - DC Motor</h2>
+    <img src="@Url.Content("~/Content/slides/bb_dc.png")">
+</section>
+
+<section class="slide">
+    <h2>Breadboard (once more)</h2>
+    <img src="@Url.Content("~/Content/slides/bb.jpg")">
+</section>
+
+
+<section class="slide">
+    <h2>Software</h2>
+    <h3 class="slide">Javascript?</h3>
+    <img class="slide" src="@Url.Content("~/Content/slides/gtfo.png")">
+</section>
+
+<section class="slide">
+    <h2>PCA9685 PWM Driver - C#</h2>
+    <img src="@Url.Content("~/Content/slides/pulse.jpg")">
+</section>
+
+<section class="slide">
+    <h2>PCA9685 PWM Driver - C#</h2>
+
+    <ul >
+        <li>Off value = 0x00</li>
+
+        <li>On value = 4001 = 00001111 10100001</li>
+        <li>Low Word = 10100001</li>
+        <li>High Word = 00001111</li>
+
+    </ul>
+
+    <div style="border: #000080 1px solid; color: #000; font-family: 'Courier New', Courier, Monospace; font-size: 10pt">
+        <div style="background: #000080; color: #fff; font-family: Verdana, Tahoma, Arial, sans-serif; font-weight: bold; padding: 2px 5px">PCA9685 Driver Snippet</div>
+        <div style="background: #ddd; max-height: 300px; overflow: auto">
+            <ol start="126" style="background: #ffffff; margin: 0 0 0 3em; padding: 0 0 0 5px;">
+                <li><span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">public</span><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#0000ff">void</span><span style="background:#ffffff;color:#000000"> SetPwm(</span><span style="background:#ffffff;color:#2b91af">PwmChannel</span><span style="background:#ffffff;color:#000000"> channel, </span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000"> on, </span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000"> off)</span></li>
+                <li style="background: #f3f3f3">     <span style="background:#ffffff;color:#000000">{</span></li>
+                <li>         <span style="background:#ffffff;color:#000000">WriteRegister(</span><span style="background:#ffffff;color:#2b91af">Register</span><span style="background:#ffffff;color:#000000">.LED0_ON_L + 4  * (</span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000">)channel, on &amp; 0xFF);</span></li>
+                <li style="background: #f3f3f3">         <span style="background:#ffffff;color:#000000">WriteRegister(</span><span style="background:#ffffff;color:#2b91af">Register</span><span style="background:#ffffff;color:#000000">.LED0_ON_H + 4  * (</span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000">)channel, on &gt;&gt; 8);</span></li>
+                <li>         <span style="background:#ffffff;color:#000000">WriteRegister(</span><span style="background:#ffffff;color:#2b91af">Register</span><span style="background:#ffffff;color:#000000">.LED0_OFF_L + 4 * (</span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000">)channel, off &amp; 0xFF);</span></li>
+                <li style="background: #f3f3f3">         <span style="background:#ffffff;color:#000000">WriteRegister(</span><span style="background:#ffffff;color:#2b91af">Register</span><span style="background:#ffffff;color:#000000">.LED0_OFF_H + 4 * (</span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000">)channel, off &gt;&gt; 8);</span></li>
+                <li>     <span style="background:#ffffff;color:#000000">}</span></li>
+            </ol>
+        </div>
+    </div>
+
+
+
+        </section>
+
+<section class="slide">
+    <h2>PWM from C#</h2>
+
+    <div style="border: #000080 1px solid; color: #000; font-family: 'Courier New', Courier, Monospace; font-size: 10pt">
+        <div style="background: #000080; color: #fff; font-family: Verdana, Tahoma, Arial, sans-serif; font-weight: bold; padding: 2px 5px">Get connection to PWM chip</div>
+        <div style="background: #ddd; max-height: 300px; overflow: auto">
+            <ol start="60" style="background: #ffffff; margin: 0 0 0 2.5em; padding: 0 0 0 5px;">
+                <li><span style="background:#ffffff;color:#0000ff">private</span><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#2b91af">IPwmDevice</span><span style="background:#ffffff;color:#000000"> GetRealDevice()</span></li>
+                <li style="background: #f3f3f3">        <span style="background:#ffffff;color:#000000">{</span></li>
+                <li>            <span style="background:#ffffff;color:#000000">_i2cDriver = </span><span style="background:#ffffff;color:#0000ff">new</span><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#2b91af">I2cDriver</span><span style="background:#ffffff;color:#000000">(SdaPin.ToProcessor(), SclPin.ToProcessor());</span></li>
+                <li style="background: #f3f3f3">&nbsp;</li>
+                <li>            <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">var</span><span style="background:#ffffff;color:#000000"> device = </span><span style="background:#ffffff;color:#2b91af">PCA9685I2cConnection</span><span style="background:#ffffff;color:#000000">.Create(_i2cDriver.Connect(0x40));</span></li>
+                <li style="background: #f3f3f3">            <span style="background:#ffffff;color:#000000">device.SetPwmUpdateRate(60);</span></li>
+                <li>&nbsp;</li>
+                <li style="background: #f3f3f3">            <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">return</span><span style="background:#ffffff;color:#000000"> device;</span></li>
+                <li>        <span style="background:#ffffff;color:#000000">}</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div style="border: #000080 1px solid; color: #000; font-family: 'Courier New', Courier, Monospace; font-size: 10pt">
+        <div style="background: #000080; color: #fff; font-family: Verdana, Tahoma, Arial, sans-serif; font-weight: bold; padding: 2px 5px">PWM chip interface</div>
+        <div style="background: #ddd; max-height: 300px; overflow: auto">
+            <ol start="28" style="background: #ffffff; margin: 0 0 0 2.5em; padding: 0 0 0 5px;">
+                <li><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#0000ff">public</span><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#0000ff">interface</span><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#2b91af">IPwmDevice</span></li>
+                <li style="background: #f3f3f3">    <span style="background:#ffffff;color:#000000">{</span></li>
+                <li>        <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">void</span><span style="background:#ffffff;color:#000000"> SetPwmUpdateRate(</span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000"> frequencyHz);</span></li>
+                <li style="background: #f3f3f3">&nbsp;</li>
+                <li>        <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">void</span><span style="background:#ffffff;color:#000000"> SetPwm(</span><span style="background:#ffffff;color:#2b91af">PwmChannel</span><span style="background:#ffffff;color:#000000"> channel, </span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000"> on, </span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000"> off);</span></li>
+                <li style="background: #f3f3f3">&nbsp;</li>
+                <li>        <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">void</span><span style="background:#ffffff;color:#000000"> SetFull(</span><span style="background:#ffffff;color:#2b91af">PwmChannel</span><span style="background:#ffffff;color:#000000"> channel, </span><span style="background:#ffffff;color:#0000ff">bool</span><span style="background:#ffffff;color:#000000"> fullOn);</span></li>
+                <li style="background: #f3f3f3">    <span style="background:#ffffff;color:#000000">}</span></li>
+            </ol>
+        </div>
+    </div>
+    <br />
+
+</section>
+
+
+<section class="slide">
+    <h2>DC Motor - C#</h2>
+    
+<div style="border: #000080 1px solid; color: #000; font-family: 'Courier New', Courier, Monospace; font-size: 10pt">
+<div style="background: #000080; color: #fff; font-family: Verdana, Tahoma, Arial, sans-serif; font-weight: bold; padding: 2px 5px">DC Motor Snippet</div>
+<div style="background: #ddd; max-height: 300px; overflow: auto">
+<ol start="34" style="background: #ffffff; margin: 0 0 0 2.5em; padding: 0 0 0 5px;">
+<li><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#0000ff">public</span><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#0000ff">void</span><span style="background:#ffffff;color:#000000"> Go(</span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000"> powerPercent, </span><span style="background:#ffffff;color:#2b91af">MotorDirection</span><span style="background:#ffffff;color:#000000"> direction = </span><span style="background:#ffffff;color:#2b91af">MotorDirection</span><span style="background:#ffffff;color:#000000">.Forward)</span></li>
+<li style="background: #f3f3f3">        <span style="background:#ffffff;color:#000000">{</span></li>
+<li>            <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">var</span><span style="background:#ffffff;color:#000000"> speedInPwm = GetPercentAsPwm(powerPercent);</span></li>
+<li style="background: #f3f3f3">            <span style="background:#ffffff;color:#000000">PwmDevice.SetPwm(_channelA, 0, speedInPwm);</span></li>
+<li>            <span style="background:#ffffff;color:#000000">PwmDevice.SetFull(_channelB, </span><span style="background:#ffffff;color:#0000ff">false</span><span style="background:#ffffff;color:#000000">);</span></li>
+<li style="background: #f3f3f3">        <span style="background:#ffffff;color:#000000">}</span></li>
+</ol>
+</div>
+</div>
+
+
+
+</section>
+
+<section class="slide">
+    <h2>Servo - C#</h2>
+    
+
+<div style="border: #000080 1px solid; color: #000; font-family: 'Courier New', Courier, Monospace; font-size: 10pt">
+<div style="background: #000080; color: #fff; font-family: Verdana, Tahoma, Arial, sans-serif; font-weight: bold; padding: 2px 5px">Servo Snippet</div>
+<div style="background: #ddd; max-height: 300px; overflow: auto">
+<ol start="25" style="background: #ffffff; margin: 0 0 0 2.5em; padding: 0 0 0 5px;">
+<li><span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">public</span><span style="background:#ffffff;color:#000000"> </span><span style="background:#ffffff;color:#0000ff">void</span><span style="background:#ffffff;color:#000000"> MoveTo(</span><span style="background:#ffffff;color:#0000ff">int</span><span style="background:#ffffff;color:#000000"> percent)</span></li>
+<li style="background: #f3f3f3">      <span style="background:#ffffff;color:#000000">{</span></li>
+<li>          <span style="background:#ffffff;color:#000000">percent = GetCoercedPercent(percent);</span></li>
+<li style="background: #f3f3f3">          <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">var</span><span style="background:#ffffff;color:#000000"> gap = MaximumPosition -  MinimumPosition;</span></li>
+<li>          <span style="background:#ffffff;color:#000000"></span><span style="background:#ffffff;color:#0000ff">var</span><span style="background:#ffffff;color:#000000"> pulseValue = MinimumPosition + (gap*percent/100);</span></li>
+<li style="background: #f3f3f3">          <span style="background:#ffffff;color:#000000">PwmDevice.SetPwm(Channel, 0, pulseValue);</span></li>
+<li>      <span style="background:#ffffff;color:#000000">}</span></li>
+</ol>
+</div>
+</div>
+
+
+
+</section>
+
+
+<section class="slide">
+    <img src="@Url.Content("~/Content/slides/hurryUp.png")">
+</section>
+@*<section class="slide">
+    <h2>Slide Server Environment</h2>
+    <p>
+        <ul>
+            <li>MachineName = @Environment.MachineName</li>
+            <li>OSVersion = @Environment.OSVersion</li>
+            <li>CLR Version = @Environment.Version</li>
+            <li>DateTime.Now = @DateTime.Now</li>
+        </ul>
+
+        @using (Html.BeginForm("DivideByZero", "Home"))
+        {
+            <p>
+                <input type="submit" class="submit" value="Divide By Zero" />
+            </p>
+        }
+    </p>
+</section>*@
+

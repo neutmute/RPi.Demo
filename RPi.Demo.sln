@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "raspberry-sharp-io", "raspberry-sharp-io", "{9EF7E239-0D81-4BC3-9704-9153B7685847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.IO.Components", "..\raspberry-sharp-io\Raspberry.IO.Components\Raspberry.IO.Components.csproj", "{8388CFCA-E3DB-43F7-B049-2CB195211CE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.IO.InterIntegratedCircuit", "..\raspberry-sharp-io\Raspberry.IO.InterIntegratedCircuit\Raspberry.IO.InterIntegratedCircuit.csproj", "{63B8403E-BC56-43F9-A045-F61ECC3871F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.IO.GeneralPurpose", "..\raspberry-sharp-io\Raspberry.IO.GeneralPurpose\Raspberry.IO.GeneralPurpose.csproj", "{281C71ED-C36D-408E-8BAA-75C381DC17E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.IO.SerialPeripheralInterface", "..\raspberry-sharp-io\Raspberry.IO.SerialPeripheralInterface\Raspberry.IO.SerialPeripheralInterface.csproj", "{326342E5-0411-40E8-9F2D-563D6B192568}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.MotorDemo", "RPi.MotorDemo\RPi.MotorDemo.csproj", "{2A6E1F02-84DB-43BC-84B0-753F68C1C987}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A04D496F-DD5C-4AD8-BB7C-83DA519DA543}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.Slides", "RPi.Slides\RPi.Slides.csproj", "{14B7698D-DB88-4F79-9247-1285435DEEDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.WinForms", "RPi.WinForms\RPi.WinForms.csproj", "{63E8B593-1F3D-4720-9744-28023954190A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8388CFCA-E3DB-43F7-B049-2CB195211CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8388CFCA-E3DB-43F7-B049-2CB195211CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8388CFCA-E3DB-43F7-B049-2CB195211CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8388CFCA-E3DB-43F7-B049-2CB195211CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63B8403E-BC56-43F9-A045-F61ECC3871F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63B8403E-BC56-43F9-A045-F61ECC3871F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B8403E-BC56-43F9-A045-F61ECC3871F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63B8403E-BC56-43F9-A045-F61ECC3871F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281C71ED-C36D-408E-8BAA-75C381DC17E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281C71ED-C36D-408E-8BAA-75C381DC17E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281C71ED-C36D-408E-8BAA-75C381DC17E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281C71ED-C36D-408E-8BAA-75C381DC17E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{326342E5-0411-40E8-9F2D-563D6B192568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326342E5-0411-40E8-9F2D-563D6B192568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326342E5-0411-40E8-9F2D-563D6B192568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326342E5-0411-40E8-9F2D-563D6B192568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6E1F02-84DB-43BC-84B0-753F68C1C987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6E1F02-84DB-43BC-84B0-753F68C1C987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6E1F02-84DB-43BC-84B0-753F68C1C987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6E1F02-84DB-43BC-84B0-753F68C1C987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14B7698D-DB88-4F79-9247-1285435DEEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B7698D-DB88-4F79-9247-1285435DEEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B7698D-DB88-4F79-9247-1285435DEEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B7698D-DB88-4F79-9247-1285435DEEDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E8B593-1F3D-4720-9744-28023954190A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E8B593-1F3D-4720-9744-28023954190A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E8B593-1F3D-4720-9744-28023954190A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E8B593-1F3D-4720-9744-28023954190A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8388CFCA-E3DB-43F7-B049-2CB195211CE8} = {9EF7E239-0D81-4BC3-9704-9153B7685847}
+		{63B8403E-BC56-43F9-A045-F61ECC3871F3} = {9EF7E239-0D81-4BC3-9704-9153B7685847}
+		{281C71ED-C36D-408E-8BAA-75C381DC17E7} = {9EF7E239-0D81-4BC3-9704-9153B7685847}
+		{326342E5-0411-40E8-9F2D-563D6B192568} = {9EF7E239-0D81-4BC3-9704-9153B7685847}
+	EndGlobalSection
+EndGlobal

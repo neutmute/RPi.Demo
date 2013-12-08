@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{14B7698D-DB88-4F79-9247-1285435DEEDA}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RPi.Slides</RootNamespace>
+    <AssemblyName>RPi.Slides</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.3.0.20105.1\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.1.0.20105.408\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\deckJs\core\deck.core.css" />
+    <Content Include="Content\deckJs\core\deck.core.js" />
+    <Content Include="Content\deckJs\core\print.css" />
+    <Content Include="Content\deckJs\extensions\goto\deck.goto.css" />
+    <Content Include="Content\deckJs\extensions\goto\deck.goto.html" />
+    <Content Include="Content\deckJs\extensions\goto\deck.goto.js" />
+    <Content Include="Content\deckJs\extensions\hash\deck.hash.css" />
+    <Content Include="Content\deckJs\extensions\hash\deck.hash.html" />
+    <Content Include="Content\deckJs\extensions\hash\deck.hash.js" />
+    <Content Include="Content\deckJs\extensions\menu\deck.menu.css" />
+    <Content Include="Content\deckJs\extensions\menu\deck.menu.js" />
+    <Content Include="Content\deckJs\extensions\navigation\deck.navigation.css" />
+    <Content Include="Content\deckJs\extensions\navigation\deck.navigation.html" />
+    <Content Include="Content\deckJs\extensions\navigation\deck.navigation.js" />
+    <Content Include="Content\deckJs\extensions\scale\deck.scale.css" />
+    <Content Include="Content\deckJs\extensions\scale\deck.scale.js" />
+    <Content Include="Content\deckJs\extensions\status\deck.status.css" />
+    <Content Include="Content\deckJs\extensions\status\deck.status.html" />
+    <Content Include="Content\deckJs\extensions\status\deck.status.js" />
+    <Content Include="Content\deckJs\themes\style\neon.css" />
+    <Content Include="Content\deckJs\themes\style\swiss.css" />
+    <Content Include="Content\deckJs\themes\style\web-2.0.css" />
+    <Content Include="Content\deckJs\themes\transition\fade.css" />
+    <Content Include="Content\deckJs\themes\transition\horizontal-slide.css" />
+    <Content Include="Content\deckJs\themes\transition\vertical-slide.css" />
+    <Content Include="Content\slides\bb.jpg" />
+    <Content Include="Content\slides\bb_dc.png" />
+    <Content Include="Content\slides\bb_i2c.png" />
+    <Content Include="Content\slides\bb_stepper.png" />
+    <Content Include="Content\slides\bb_ubec.png" />
+    <Content Include="Content\slides\circuit2.gif" />
+    <Content Include="Content\slides\gtfo.png" />
+    <Content Include="Content\slides\hurryUp.png" />
+    <Content Include="Content\slides\hxt9002.gif" />
+    <Content Include="Content\slides\pulse.jpg" />
+    <Content Include="Content\slides\pwmBoard2.jpg" />
+    <Content Include="Content\slides\28BYJ-48.jpg" />
+    <Content Include="Content\slides\cobbler.jpg" />
+    <Content Include="Content\slides\dcmotor.gif" />
+    <Content Include="Content\slides\gpio-pinout.jpg" />
+    <Content Include="Content\slides\HBridgeTable.gif" />
+    <Content Include="Content\slides\hxt900.jpg" />
+    <Content Include="Content\slides\piPwm.jpg" />
+    <Content Include="Content\slides\pwm.jpg" />
+    <Content Include="Content\slides\pwmBoard.jpg" />
+    <Content Include="Content\slides\RaspberryPi.jpg" />
+    <Content Include="Content\slides\raspbmc.jpg" />
+    <Content Include="Content\slides\servoPlane.jpg" />
+    <Content Include="Content\slides\servo_rc_pwm.jpg" />
+    <Content Include="Content\slides\sn754410-connections.jpg" />
+    <Content Include="Content\slides\stepper.jpg" />
+    <Content Include="Content\slides\stepper2.gif" />
+    <Content Include="Content\slides\stepperSequence.gif" />
+    <Content Include="Content\slides\technic-mini-motor-9v.gif" />
+    <Content Include="Content\slides\uln2003.gif" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\deckJs\core\deck.core.scss" />
+    <Content Include="Content\deckJs\core\print.scss" />
+    <Content Include="Content\deckJs\extensions\goto\deck.goto.scss" />
+    <Content Include="Content\deckJs\extensions\hash\deck.hash.scss" />
+    <Content Include="Content\deckJs\extensions\menu\deck.menu.scss" />
+    <Content Include="Content\deckJs\extensions\navigation\deck.navigation.scss" />
+    <Content Include="Content\deckJs\extensions\scale\deck.scale.scss" />
+    <Content Include="Content\deckJs\extensions\status\deck.status.scss" />
+    <Content Include="Content\deckJs\themes\style\neon.scss" />
+    <Content Include="Content\deckJs\themes\style\swiss.scss" />
+    <Content Include="Content\deckJs\themes\style\web-2.0.scss" />
+    <Content Include="Content\deckJs\themes\style\_reset.scss" />
+    <Content Include="Content\deckJs\themes\transition\fade.scss" />
+    <Content Include="Content\deckJs\themes\transition\horizontal-slide.scss" />
+    <Content Include="Content\deckJs\themes\transition\vertical-slide.scss" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Content\slides\RaspberryPiLayout.jpg" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_DeckJsLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4370/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
