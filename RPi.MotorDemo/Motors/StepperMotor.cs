@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Raspberry.IO.Components.Expanders.Pca9685;
+using Raspberry.IO.Components.Controllers.Pca9685;
 
 namespace RPi.MotorDemo.Motors
 {

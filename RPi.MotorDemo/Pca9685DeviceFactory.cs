@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Raspberry.IO.Components.Expanders.Pca9685;
+using Raspberry.IO.Components.Controllers.Pca9685;
 using Raspberry.IO.GeneralPurpose;
 using Raspberry.IO.InterIntegratedCircuit;
 using RPi.MotorDemo.Utils;
@@ -48,7 +48,7 @@ namespace RPi.MotorDemo
             _i2cDriver = new I2cDriver(SdaPin.ToProcessor(), SclPin.ToProcessor());
 
             Log.Info("Creating device...");
-            var device = PCA9685I2cConnection.Create(_i2cDriver.Connect(DeviceAddress));
+            var device = Pca9685Connection.Create(_i2cDriver.Connect(DeviceAddress));
             Log.Info("Setting frequency...");
             device.SetPwmUpdateRate(PwmFrequency); //                        # Set frequency to 60 Hz
 

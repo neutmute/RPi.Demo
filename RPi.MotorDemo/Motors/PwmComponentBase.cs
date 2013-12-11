@@ -1,4 +1,4 @@
-﻿using Raspberry.IO.Components.Expanders.Pca9685;
+﻿using Raspberry.IO.Components.Controllers.Pca9685;
 using RPi.MotorDemo.Utils;
 
 namespace RPi.MotorDemo.Motors

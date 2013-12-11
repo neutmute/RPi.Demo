@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Raspberry.IO.Components.Expanders.Pca9685;
+using Raspberry.IO.Components.Controllers.Pca9685;
+using Raspberry.IO.Components.Controllers.Pca9685;
 using RPi.MotorDemo.Utils;
 
 namespace RPi.MotorDemo
