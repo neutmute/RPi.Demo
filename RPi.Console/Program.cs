@@ -10,6 +10,11 @@ using RPi.Pwm.Motors;
 
 namespace RPi.ConsoleApp
 {
+    
+    /// <summary>
+    /// USAGE example: 
+    /// rpiconsole -a="17 Dec 2013 06:30"
+    /// </summary>
     class Program
     {
         private readonly static ILog Log = LogManager.GetCurrentClassLogger();
@@ -22,6 +27,8 @@ namespace RPi.ConsoleApp
             var device = deviceFactory.GetDevice();
             var motorController = new PwmController(device);
             motorController.Init();
+
+            Log.InfoFormat("RPi.Console running with {0}", options);
             
             switch (options.Mode)
             {
@@ -34,7 +41,7 @@ namespace RPi.ConsoleApp
                     break;
 
                 case Mode.Stepper:
-                    motorController.StepperMotor.Rotate(600);
+                    motorController.Stepper.Rotate(600);
                     break;
 
                 case Mode.Led:
@@ -43,6 +50,11 @@ namespace RPi.ConsoleApp
 
                 case Mode.RawPwm:
                     RunRawPwm(device);
+                    break;
+
+                case Mode.AlarmClock:
+                    var alarmClock = new AlarmClock(motorController);
+                    alarmClock.Run();
                     break;
             }
 

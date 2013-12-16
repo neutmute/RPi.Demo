@@ -21,7 +21,7 @@ namespace RPi.Pwm
         public DcMotor DcMotor { get; private set; }
         public Led Led0 { get; private set; }
 
-        public StepperMotor StepperMotor { get; private set; }
+        public StepperMotor Stepper { get; private set; }
 
         private readonly IPwmDevice _pwmDevice;
 
@@ -35,7 +35,7 @@ namespace RPi.Pwm
             Servo = new ServoMotor(_pwmDevice, PwmChannel.C1, 150, 600);
             DcMotor = new DcMotor(_pwmDevice, PwmChannel.C4, PwmChannel.C5);
         
-            StepperMotor = new StepperMotor(
+            Stepper = new StepperMotor(
                 _pwmDevice
                 , PwmChannel.C11
                 , PwmChannel.C10
@@ -47,6 +47,7 @@ namespace RPi.Pwm
         
         public void AllStop()
         {
+            Log.Info("All stop");
             Led0.Off();
             DcMotor.Stop();
         }

@@ -91,8 +91,8 @@ namespace RPi.WinForms
             {
                 return;
             }
-            _motorController.StepperMotor.StepDelayMs = (int)numericStepperDelay.Value;
-            _motorController.StepperMotor.Rotate(Convert.ToInt32(textStepperBasic.Text));
+            _motorController.Stepper.StepDelayMs = (int)numericStepperDelay.Value;
+            _motorController.Stepper.Rotate(Convert.ToInt32(textStepperBasic.Text));
 
         }
 
@@ -129,7 +129,7 @@ namespace RPi.WinForms
 
         private void btnStepperSequenceLoad_Click(object sender, EventArgs e)
         {
-            txtSequence.Text = string.Join(Environment.NewLine, _motorController.StepperMotor.Sequence);
+            txtSequence.Text = string.Join(Environment.NewLine, _motorController.Stepper.Sequence);
         }
 
         private void btnStepperSequenceSet_Click(object sender, EventArgs e)
@@ -137,17 +137,17 @@ namespace RPi.WinForms
 
             var text = txtSequence.Text;
             var sequence = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            _motorController.StepperMotor.Sequence = sequence;
+            _motorController.Stepper.Sequence = sequence;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            _motorController.StepperMotor.Rotate(30);
+            _motorController.Stepper.Rotate(30);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            _motorController.StepperMotor.Rotate(-30);
+            _motorController.Stepper.Rotate(-30);
 
         }
     }
