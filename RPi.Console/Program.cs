@@ -62,6 +62,7 @@ namespace RPi.ConsoleApp
 
             motorController.AllStop();
             deviceFactory.Dispose();
+            Log.Info("Bye!");
         }
 
         private static void RunRawPwm(IPwmDevice pwmDevice)
