@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Common.Logging;
 using Raspberry.IO.Components.Controllers.Pca9685;
 using Raspberry.IO.GeneralPurpose;
 using Raspberry.IO.InterIntegratedCircuit;
-using RPi.MotorDemo.Utils;
 
-namespace RPi.MotorDemo
+namespace RPi.Pwm
 {
     public class Pca9685DeviceFactory : IDisposable
     {
+        #region Fields
+
         private bool _disposed;
         public const ConnectorPin SdaPin = ConnectorPin.P1Pin03;
         public const ConnectorPin SclPin = ConnectorPin.P1Pin05;
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private I2cDriver _i2cDriver;
+
+        #endregion
+
+        #region Properties
+
         public bool IsConnected { get; set; }
         public int PwmFrequency { get; set; }
         public int DeviceAddress { get; set; }
 
-        private I2cDriver _i2cDriver;
+        #endregion
 
-        private static readonly Logger Log = new Logger();
+
+        #region Methods
 
         public IPwmDevice GetDevice()
         {
@@ -67,7 +77,6 @@ namespace RPi.MotorDemo
             GC.SuppressFinalize(this);
         }
 
-
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -87,5 +96,8 @@ namespace RPi.MotorDemo
                 _disposed = true;
             }
         }
+
+        #endregion
+
     }
 }

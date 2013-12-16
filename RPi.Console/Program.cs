@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Raspberry.IO.Components.Controllers.Pca9685;
-using Raspberry.IO.GeneralPurpose;
-using Raspberry.IO.InterIntegratedCircuit;
-using RPi.MotorDemo.Utils;
+using Common.Logging;
 
-namespace RPi.MotorDemo
+namespace RPi.Pwm
 {
     class Program
     {
-        private static readonly Logger Log = new Logger();
+        private readonly static ILog Log = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {
             var deviceFactory = new Pca9685DeviceFactory();
             var device = deviceFactory.GetDevice();
-            var motorController = new MotorController(device);
+            var motorController = new PwmController(device);
             motorController.Init();
 
             //RunLed(motorController);
@@ -44,7 +41,7 @@ namespace RPi.MotorDemo
 
         }
 
-        private static void RunLed(MotorController motorController)
+        private static void RunLed(PwmController motorController)
         {
             for (int i = 0; i < 20; i++)
             {
@@ -67,7 +64,7 @@ namespace RPi.MotorDemo
             motorController.Led0.Off();
         }
 
-        private static void RunDcMotor(MotorController motorController)
+        private static void RunDcMotor(PwmController motorController)
         {
             for (int i = 10; i <= 100; i += 10)
             {
@@ -87,7 +84,7 @@ namespace RPi.MotorDemo
             motorController.DcMotor.Stop();
         }
 
-        private static void RunServo(MotorController motorController)
+        private static void RunServo(PwmController motorController)
         {
             motorController.Servo.MoveTo(0);
             Thread.Sleep(1000);

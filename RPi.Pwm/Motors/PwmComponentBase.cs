@@ -1,16 +1,17 @@
-﻿using Raspberry.IO.Components.Controllers.Pca9685;
-using RPi.MotorDemo.Utils;
+﻿using Common.Logging;
+using Raspberry.IO.Components.Controllers.Pca9685;
 
-namespace RPi.MotorDemo.Motors
+
+namespace RPi.Pwm.Motors
 {
     public abstract class PwmComponentBase
     {
 
-        private static readonly Logger _Log = new Logger();
+        private readonly static ILog _Log = LogManager.GetCurrentClassLogger();
         protected const int PwmMaximum = 4095;
 
         protected IPwmDevice Controller {get; private set;}
-        protected Logger Log { get { return _Log; } }
+        protected ILog Log { get { return _Log; } }
 
         protected PwmComponentBase(IPwmDevice controller)
         {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Raspberry.IO.Components.Controllers.Pca9685;
-using RPi.MotorDemo.Motors;
+using RPi.Pwm.Motors;
 
-namespace RPi.MotorDemo
+namespace RPi.Pwm.Optics
 {
     public class Led : PwmComponentBase
     {
@@ -20,19 +20,19 @@ namespace RPi.MotorDemo
         public void On(int percent)
         {
             var percentAsPwm = GetPercentAsPwm(percent);
-            Log.Info("Led{0}={1}", _channel, percent);
+            Log.Info(m=>m("Led{0}={1}", _channel, percent));
             Controller.SetPwm(_channel, 0, percentAsPwm);
         }
 
         public void On()
         {
-            Log.Info("Led{0}=on", _channel);
+            Log.Info(m=>m("Led{0}=on", _channel));
             Controller.SetFull(_channel, true);
         }
 
         public void Off()
         {
-            Log.Info("Led{0}=off", _channel);
+           Log.Info(m=>m("Led{0}=off", _channel));
             Controller.SetFull(_channel, false);
         }
     }

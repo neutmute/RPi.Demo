@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.IO.GeneralPurpose
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.IO.SerialPeripheralInterface", "..\raspberry-sharp-io\Raspberry.IO.SerialPeripheralInterface\Raspberry.IO.SerialPeripheralInterface.csproj", "{326342E5-0411-40E8-9F2D-563D6B192568}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.MotorDemo", "RPi.MotorDemo\RPi.MotorDemo.csproj", "{2A6E1F02-84DB-43BC-84B0-753F68C1C987}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.Console", "RPi.Console\RPi.Console.csproj", "{2A6E1F02-84DB-43BC-84B0-753F68C1C987}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A04D496F-DD5C-4AD8-BB7C-83DA519DA543}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.Slides", "RPi.Slides\RPi.Slides.csproj", "{14B7698D-DB88-4F79-9247-1285435DEEDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.WinForms", "RPi.WinForms\RPi.WinForms.csproj", "{63E8B593-1F3D-4720-9744-28023954190A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.Pwm", "RPi.Pwm\RPi.Pwm.csproj", "{552A044B-139F-4F45-96A0-0698A05C52D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,10 @@ Global
 		{63E8B593-1F3D-4720-9744-28023954190A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63E8B593-1F3D-4720-9744-28023954190A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63E8B593-1F3D-4720-9744-28023954190A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552A044B-139F-4F45-96A0-0698A05C52D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552A044B-139F-4F45-96A0-0698A05C52D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552A044B-139F-4F45-96A0-0698A05C52D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552A044B-139F-4F45-96A0-0698A05C52D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Raspberry.IO.Components.Controllers.Pca9685;
 
-namespace RPi.MotorDemo.Motors
+namespace RPi.Pwm.Motors
 {
     public class ServoMotor : PwmComponentBase
     {
@@ -28,7 +28,7 @@ namespace RPi.MotorDemo.Motors
 
             var gap = MaximumPosition -  MinimumPosition;
             var pulseValue = MinimumPosition + (gap*percent/100);
-            Log.Info("Servo.{0} => {1}% (pulse={2})", Channel, percent, pulseValue);
+            Log.Info(m=>m("Servo.{0} => {1}% (pulse={2})", Channel, percent, pulseValue));
             Controller.SetPwm(Channel, 0, pulseValue);
         }
     }

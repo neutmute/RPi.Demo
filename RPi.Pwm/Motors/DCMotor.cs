@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Raspberry.IO.Components.Controllers.Pca9685;
 
-namespace RPi.MotorDemo.Motors
+namespace RPi.Pwm.Motors
 {
     public enum MotorDirection
     {
@@ -38,19 +38,19 @@ namespace RPi.MotorDemo.Motors
 
             if (powerPercent == 100)
             {
-                Log.Info("DC.{0}={2}.{1} (FULL)", channelA, powerPercent, direction);
+                Log.Info(m=>m("DC.{0}={2}.{1} (FULL)", channelA, powerPercent, direction));
                 Controller.SetFull(channelA, true);
                 Controller.SetFull(channelB, false);
             }
             else if (powerPercent == 0)
             {
-                Log.Info("DC.{0}={2}.{1} (FULL OFF)", channelA, powerPercent, direction);
+                Log.Info(m=>m("DC.{0}={2}.{1} (FULL OFF)", channelA, powerPercent, direction));
                 Controller.SetFull(channelA, false);
                 Controller.SetFull(channelB, false);
             }
             else
             {
-                Log.Info("DC.{0}={3}.{1} (pwm={2})", channelA, powerPercent, speedInPwm, direction);
+                Log.Info(m=>m("DC.{0}={3}.{1} (pwm={2})", channelA, powerPercent, speedInPwm, direction));
                 Controller.SetPwm(channelA, 0, speedInPwm);
                 Controller.SetFull(channelB, false);
             }
@@ -58,7 +58,7 @@ namespace RPi.MotorDemo.Motors
 
         public void Stop()
         {
-            Log.Info("DC.{0}=FULL OFF", _controlChannel0);
+            Log.Info(m=>m("DC.{0}=FULL OFF", _controlChannel0));
             Controller.SetFull(_controlChannel0, false);
             Controller.SetFull(_controlChannel1, false);
         }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using Raspberry.IO.Components.Controllers.Pca9685;
 
-namespace RPi.MotorDemo.Motors
+namespace RPi.Pwm.Motors
 {
     public class StepperMotor : PwmComponentBase
     {
@@ -55,7 +55,7 @@ namespace RPi.MotorDemo.Motors
             }
             var direction = GetDirection(steps);
 
-            Log.Info("Stepper: {0} steps {1}", steps, direction);
+            Log.Info(m=>m("Stepper: {0} steps {1}", steps, direction));
             for (int i = 0; i < Math.Abs(steps); i++)
             {
                 AdvanceStep(direction);
@@ -65,7 +65,7 @@ namespace RPi.MotorDemo.Motors
                     Controller.SetFull(_channels[controllerIndex], IsEnergised(sequenceCode, controllerIndex));
                 }
 
-                Log.Info("Step {3}/{4}-{0}: {1}. sleep={2}", _currentStep, sequenceCode, StepDelayMs, i, steps);
+                Log.Info(m=>m("Step {3}/{4}-{0}: {1}. sleep={2}", _currentStep, sequenceCode, StepDelayMs, i, steps));
                 Thread.Sleep(StepDelayMs);    
             }
 

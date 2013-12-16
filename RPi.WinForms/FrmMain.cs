@@ -7,15 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using RPi.MotorDemo;
-using RPi.MotorDemo.Motors;
-using RPi.MotorDemo.Utils;
+using RPi.Pwm;
+using RPi.Pwm.Motors;
 
 namespace RPi.WinForms
 {
     public partial class FrmMain : Form
     {
-        private MotorController _motorController;
+        private PwmController _motorController;
         private Pca9685DeviceFactory _deviceFactory;
         public FrmMain()
         {
@@ -26,16 +25,16 @@ namespace RPi.WinForms
         {
             _deviceFactory = new Pca9685DeviceFactory();
             var device = _deviceFactory.GetDevice();
-            _motorController = new MotorController(device);
+            _motorController = new PwmController(device);
 
             _motorController.Init();
-            LogBus.Instance.LogReceived += Instance_LogReceived;      
+            //LogBus.Instance.LogReceived += Instance_LogReceived;      
         }
 
-        void Instance_LogReceived(object sender, LogEvent e)
-        {
-            textLog.Text = e.Message + Environment.NewLine + textLog.Text;
-        }
+        //void Instance_LogReceived(object sender, LogEvent e)
+        //{
+        //    textLog.Text = e.Message + Environment.NewLine + textLog.Text;
+        //}
         
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {

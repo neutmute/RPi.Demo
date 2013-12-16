@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Common.Logging;
 using Raspberry.IO.Components.Controllers.Pca9685;
 using Raspberry.IO.GeneralPurpose;
 using Raspberry.IO.InterIntegratedCircuit;
-using RPi.MotorDemo.Motors;
-using RPi.MotorDemo.Utils;
+using RPi.Pwm.Motors;
+using RPi.Pwm.Optics;
 
-namespace RPi.MotorDemo
+namespace RPi.Pwm
 {
-    public class MotorController
+    public class PwmController
     {
-        private static readonly Logger Log = new Logger();
+        private readonly static ILog Log = LogManager.GetCurrentClassLogger();
 
         public ServoMotor Servo { get; private set; }
 
@@ -24,7 +25,7 @@ namespace RPi.MotorDemo
 
         private readonly IPwmDevice _pwmDevice;
 
-        public MotorController(IPwmDevice pwmDevice)
+        public PwmController(IPwmDevice pwmDevice)
         {
             _pwmDevice = pwmDevice;
         }
