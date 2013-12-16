@@ -25,7 +25,7 @@ namespace RPi.ConsoleApp
             var options = new ConsoleOptions(args);
 
             var deviceFactory = new Pca9685DeviceFactory();
-            var device = deviceFactory.GetDevice();
+            var device = deviceFactory.GetDevice(options.UseFakeDevice);
             var motorController = new PwmController(device);
             motorController.Init();
 

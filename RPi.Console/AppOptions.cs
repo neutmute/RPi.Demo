@@ -21,7 +21,8 @@ namespace RPi.ConsoleApp
     {
         public Mode Mode { get; set; }
 
-        public DateTime AlarmDate {get;set;}
+        public DateTime AlarmDate { get; set; }
+        public bool UseFakeDevice { get; set; }
 
         private bool _showHelp;
 
@@ -30,7 +31,7 @@ namespace RPi.ConsoleApp
             var p = new OptionSet {
                 { "m|mode=",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
                 { "a|alarmdate=",  v => {AlarmDate = AlarmDate = DateTime.Parse(v); Mode = Mode.AlarmClock;}},
-                { "t|alarmtimer=",  v => {AlarmDate = AlarmDate = DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
+                { "f|usefake=",  v => {UseFakeDevice = bool.Parse(v);}},
                 { "h|?:", v => _showHelp = true }
             };
             p.Parse(args);

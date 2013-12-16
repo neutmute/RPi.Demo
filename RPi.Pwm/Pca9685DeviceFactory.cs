@@ -32,9 +32,9 @@ namespace RPi.Pwm
 
         #region Methods
 
-        public IPwmDevice GetDevice()
+        public IPwmDevice GetDevice(bool forceFakeDevice = false)
         {
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            if (!forceFakeDevice && Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 return GetRealDevice();
             }
