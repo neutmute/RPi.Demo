@@ -54,7 +54,7 @@ namespace RPi.ConsoleApp
         {
             Log.Info("Jingle Bells!");
             _pwmController.DcMotor.Go(100);
-            Thread.Sleep(10);
+            Thread.Sleep(10000);
         }
     }
 }

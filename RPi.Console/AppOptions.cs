@@ -30,7 +30,8 @@ namespace RPi.ConsoleApp
         {
             var p = new OptionSet {
                 { "m|mode=",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
-                { "a|alarmdate=",  v => {AlarmDate = AlarmDate = DateTime.Parse(v); Mode = Mode.AlarmClock;}},
+                { "a|alarmdate=",  v => {AlarmDate =  DateTime.Parse(v); Mode = Mode.AlarmClock;}},
+                { "t|alarmtime=",  v => {AlarmDate =  DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
                 { "f|usefake=",  v => {UseFakeDevice = bool.Parse(v);}},
                 { "h|?:", v => _showHelp = true }
             };
