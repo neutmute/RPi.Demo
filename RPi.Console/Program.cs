@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Common.Logging;
+using Raspberry.IO.Components.Controllers.Pca9685;
+using RPi.Pwm;
+using RPi.Pwm.Motors;
 
-namespace RPi.Pwm
+namespace RPi.ConsoleApp
 {
     class Program
     {
@@ -13,32 +16,54 @@ namespace RPi.Pwm
 
         static void Main(string[] args)
         {
+            var options = new ConsoleOptions(args);
+
             var deviceFactory = new Pca9685DeviceFactory();
             var device = deviceFactory.GetDevice();
             var motorController = new PwmController(device);
             motorController.Init();
+            
+            switch (options.Mode)
+            {
+                case Mode.DcMotor: 
+                    RunDcMotor(motorController);
+                    break;
 
-            //RunLed(motorController);
+                case Mode.Servo: 
+                    RunServo(motorController);
+                    break;
 
+                case Mode.Stepper:
+                    motorController.StepperMotor.Rotate(600);
+                    break;
 
-            motorController.StepperMotor.Rotate(600);
+                case Mode.Led:
+                    RunLed(motorController);
+                    break;
 
-            //RunDcMotor(motorController);
-            //RunServo(motorController);
+                case Mode.RawPwm:
+                    RunRawPwm(device);
+                    break;
+            }
 
             motorController.AllStop();
             deviceFactory.Dispose();
+        }
 
-            //while (!Console.KeyAvailable)
-            //{
-            //    Log.Info("Set channel={0} to {1}", options.Channel, options.PwmOn);
-            //    device.SetPwm(options.Channel, 0, options.PwmOn);
-            //    Thread.Sleep(1000);
-            //    Log.Info("Set channel={0} to {1}", options.Channel, options.PwmOff);
-            //    device.SetPwm(options.Channel, 0, options.PwmOff);
-            //    Thread.Sleep(1000);
-            //}
-
+        private static void RunRawPwm(IPwmDevice pwmDevice)
+        {
+            while (!Console.KeyAvailable)
+            {
+                var channel = PwmChannel.C0;
+                var pwmOn = 2000;
+                var pwmOff = 2000;
+                Log.Info(m => m("Set channel={0} to {1}", channel, pwmOn));
+                pwmDevice.SetPwm(channel, 0, pwmOn);
+                Thread.Sleep(1000);
+                Log.Info(m => m("Set channel={0} to {1}", channel, pwmOff));
+                pwmDevice.SetPwm(PwmChannel.C0, 0, pwmOff);
+                Thread.Sleep(1000);
+            }
         }
 
         private static void RunLed(PwmController motorController)
@@ -77,7 +102,7 @@ namespace RPi.Pwm
 
             for (int i = 10; i <= 100; i += 10)
             {
-                motorController.DcMotor.Go(i, Motors.MotorDirection.Reverse);
+                motorController.DcMotor.Go(i, MotorDirection.Reverse);
                 Thread.Sleep(1000);
             }
 
