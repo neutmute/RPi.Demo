@@ -51,7 +51,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmClock.cs" />
+    <Compile Include="Alarm\AlarmClock.cs" />
+    <Compile Include="Alarm\AlarmTimer.cs" />
     <Compile Include="AppOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

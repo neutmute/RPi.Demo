@@ -21,7 +21,7 @@ namespace RPi.ConsoleApp
     {
         public Mode Mode { get; set; }
 
-        public DateTime Alarm {get;set;}
+        public DateTime AlarmDate {get;set;}
 
         private bool _showHelp;
 
@@ -29,7 +29,8 @@ namespace RPi.ConsoleApp
         {
             var p = new OptionSet {
                 { "m|mode=",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
-                { "a|alarm=",  v => {Alarm = Alarm = DateTime.Parse(v); Mode = Mode.AlarmClock;}},
+                { "a|alarmdate=",  v => {AlarmDate = AlarmDate = DateTime.Parse(v); Mode = Mode.AlarmClock;}},
+                { "t|alarmtimer=",  v => {AlarmDate = AlarmDate = DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
                 { "h|?:", v => _showHelp = true }
             };
             p.Parse(args);
@@ -44,10 +45,10 @@ namespace RPi.ConsoleApp
         public override string ToString()
         {
             return string.Format(
-                "Mode={1}{0}Alarm={2:yyyy-MM-dd HH:mm:ss}{0}"
+                "Mode={1}{0}AlarmDate={2:yyyy-MM-dd HH:mm:ss}{0}"
                 , Environment.NewLine
                 , Mode
-                , Alarm
+                , AlarmDate
                );
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Common.Logging;
 using Raspberry.IO.Components.Controllers.Pca9685;
 using RPi.Pwm;
@@ -54,7 +55,8 @@ namespace RPi.ConsoleApp
 
                 case Mode.AlarmClock:
                     var alarmClock = new AlarmClock(motorController);
-                    alarmClock.Run();
+                    alarmClock.Set(options.AlarmDate);
+                    alarmClock.WaitForAlarm();
                     break;
             }
 
