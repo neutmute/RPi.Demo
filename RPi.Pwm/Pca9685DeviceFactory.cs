@@ -40,13 +40,13 @@ namespace RPi.Pwm
             }
             else
             {
-                Log.Info("This is not a pi. Giving fake device");
                 return GetStubDevice();
             }
         }
 
         private IPwmDevice GetStubDevice()
         {
+            Log.Info("This is not a pi. Giving fake device");
             return new PwmDeviceStub();
         }
 
