@@ -42,7 +42,8 @@ namespace RPi.ConsoleApp
         private Task GetWaitTask()
         {
             var t = new Task(
-                () => {
+                () => 
+                {
                     var timer = new AlarmTimer();
                     timer.WaitUntil(_alarmTime);
                 }

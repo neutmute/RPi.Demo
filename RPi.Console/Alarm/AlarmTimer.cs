@@ -8,8 +8,8 @@ namespace RPi.ConsoleApp
 {
     class AlarmTimer
     {
-        Timer _timer;
-        private AutoResetEvent _waitHandle;
+        readonly Timer _timer;
+        private readonly AutoResetEvent _waitHandle;
         private DateTime _alarmTime;
         private int _lastMinute;
         private readonly static ILog Log = LogManager.GetCurrentClassLogger();
