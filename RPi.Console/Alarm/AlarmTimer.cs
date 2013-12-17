@@ -14,6 +14,7 @@ namespace RPi.ConsoleApp
         private int _lastMinute;
         private readonly static ILog Log = LogManager.GetCurrentClassLogger();
 
+
         public AlarmTimer()
         {
             // todo: implement dispose
@@ -40,7 +41,7 @@ namespace RPi.ConsoleApp
                 _timer.Stop();
                 _waitHandle.Set();
             }
-
+            
             var currentMinute = DateTime.Now.Minute;
             if (currentMinute != _lastMinute)
             {

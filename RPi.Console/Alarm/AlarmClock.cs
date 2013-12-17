@@ -33,23 +33,45 @@ namespace RPi.ConsoleApp
 
         public void WaitForAlarm()
         {
-            var t = GetWaitTask();
-            t.Start();
-            Task.WaitAll(t);
+            var alarmTimer = GetWaitTask();
+            var ledPulser = GetLedPulserTask();
+            ledPulser.Start();
+            alarmTimer.Start();
+            Task.WaitAll(alarmTimer);
+            
             ActivateAlarm();
         }
 
         private Task GetWaitTask()
         {
-            var t = new Task(
+            var alarmTimerTask = new Task(
                 () => 
                 {
                     var timer = new AlarmTimer();
                     timer.WaitUntil(_alarmTime);
                 }
                 );
-            return t;
+            return alarmTimerTask;
         }
+
+        private Task GetLedPulserTask()
+        {
+            var pulserTask = new Task(
+                () =>
+                {
+                    int i = 0;
+                    while (i < int.MaxValue)
+                    {
+                        i++;
+                        var percentage = (int) (50*(1 + Math.Sin( i / 20f )));
+                        _pwmController.Led0.On(percentage);   
+                        Thread.Sleep(50);
+                    }
+                }
+                );
+            return pulserTask;
+        }
+
 
         private void ActivateAlarm()
         {
