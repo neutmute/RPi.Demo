@@ -63,6 +63,9 @@ namespace RPi.ConsoleApp
             motorController.AllStop();
             deviceFactory.Dispose();
             Log.Info("Bye!");
+
+            //http://nlog-project.org/2011/10/30/using-nlog-with-mono.html
+            NLog.LogManager.Configuration = null;
         }
 
         private static void RunRawPwm(IPwmDevice pwmDevice)
