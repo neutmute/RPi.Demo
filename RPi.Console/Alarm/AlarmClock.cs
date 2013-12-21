@@ -14,6 +14,7 @@ namespace RPi.ConsoleApp
         private readonly static ILog Log = LogManager.GetCurrentClassLogger();
         private PwmController _pwmController;
         private DateTime _alarmTime;
+        private bool _alarmFired;
 
         public AlarmClock(PwmController pwmController)
         {
@@ -60,7 +61,7 @@ namespace RPi.ConsoleApp
                 () =>
                 {
                     int i = 0;
-                    while (i < int.MaxValue)
+                    while (!_alarmFired && i < int.MaxValue)
                     {
                         i++;
                         var percentage = (int) (50*(1 + Math.Sin( i / 20f )));
@@ -75,6 +76,7 @@ namespace RPi.ConsoleApp
 
         private void ActivateAlarm()
         {
+            _alarmFired = true;
             Log.Info("Jingle Bells!");
             _pwmController.DcMotor.Go(100);
             Thread.Sleep(10000);

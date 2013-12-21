@@ -18,10 +18,18 @@ namespace RPi.ConsoleApp
     /// </summary>
     class Program
     {
-        private readonly static ILog Log = LogManager.GetCurrentClassLogger();
-
+        ILog Log;
+      
         static void Main(string[] args)
         {
+            var program = new Program();
+            program.Run(args);
+        }
+
+        private void Run(string[] args)
+        {
+            // Creating this from static causes an exception in Raspian. Not in ubunti though?
+            Log  = LogManager.GetCurrentClassLogger();
             var options = new ConsoleOptions(args);
 
             var deviceFactory = new Pca9685DeviceFactory();
@@ -29,15 +37,15 @@ namespace RPi.ConsoleApp
             var motorController = new PwmController(device);
             motorController.Init();
 
-            Log.InfoFormat("RPi.Console running with {0}", options);
-            
+            //Log.InfoFormat("RPi.Console running with {0}", options);
+
             switch (options.Mode)
             {
-                case Mode.DcMotor: 
+                case Mode.DcMotor:
                     RunDcMotor(motorController);
                     break;
 
-                case Mode.Servo: 
+                case Mode.Servo:
                     RunServo(motorController);
                     break;
 
@@ -62,7 +70,6 @@ namespace RPi.ConsoleApp
 
             motorController.AllStop();
             deviceFactory.Dispose();
-            Log.Info("Bye!");
 
             //http://nlog-project.org/2011/10/30/using-nlog-with-mono.html
             NLog.LogManager.Configuration = null;
@@ -75,10 +82,10 @@ namespace RPi.ConsoleApp
                 var channel = PwmChannel.C0;
                 var pwmOn = 2000;
                 var pwmOff = 2000;
-                Log.Info(m => m("Set channel={0} to {1}", channel, pwmOn));
+                //Log.Info(m => m("Set channel={0} to {1}", channel, pwmOn));
                 pwmDevice.SetPwm(channel, 0, pwmOn);
                 Thread.Sleep(1000);
-                Log.Info(m => m("Set channel={0} to {1}", channel, pwmOff));
+                //Log.Info(m => m("Set channel={0} to {1}", channel, pwmOff));
                 pwmDevice.SetPwm(PwmChannel.C0, 0, pwmOff);
                 Thread.Sleep(1000);
             }
