@@ -75,17 +75,17 @@ namespace RPi.ConsoleApp
             NLog.LogManager.Configuration = null;
         }
 
-        private static void RunRawPwm(IPwmDevice pwmDevice)
+        private void RunRawPwm(IPwmDevice pwmDevice)
         {
             while (!Console.KeyAvailable)
             {
                 var channel = PwmChannel.C0;
                 var pwmOn = 2000;
                 var pwmOff = 2000;
-                //Log.Info(m => m("Set channel={0} to {1}", channel, pwmOn));
+                Log.Info(m => m("Set channel={0} to {1}", channel, pwmOn));
                 pwmDevice.SetPwm(channel, 0, pwmOn);
                 Thread.Sleep(1000);
-                //Log.Info(m => m("Set channel={0} to {1}", channel, pwmOff));
+                Log.Info(m => m("Set channel={0} to {1}", channel, pwmOff));
                 pwmDevice.SetPwm(PwmChannel.C0, 0, pwmOff);
                 Thread.Sleep(1000);
             }
