@@ -11,15 +11,27 @@ namespace RPi.ConsoleApp
 {
     class AlarmClock
     {
-        private readonly static ILog Log = LogManager.GetCurrentClassLogger();
-        private PwmController _pwmController;
+        #region Fields
+
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly PwmController _pwmController;
         private DateTime _alarmTime;
         private bool _alarmFired;
+
+        #endregion
+
+
+        #region Ctor
 
         public AlarmClock(PwmController pwmController)
         {
             _pwmController = pwmController;
         }
+
+        #endregion
+
+
+        #region Methods
 
         public void Set(DateTime alarmTime)
         {
@@ -32,54 +44,48 @@ namespace RPi.ConsoleApp
             Set(DateTime.Now + timeSpan);
         }
 
-        public void WaitForAlarm()
+        public async Task WaitForAlarm()
         {
-            var alarmTimer = GetWaitTask();
-            var ledPulser = GetLedPulserTask();
-            ledPulser.Start();
-            alarmTimer.Start();
-            Task.WaitAll(alarmTimer);
+            StartLedSignOfLifeAsync();
+            var alarmTimer = StartAlarmTimerAsync();
+
+            await alarmTimer;
             
             ActivateAlarm();
         }
 
-        private Task GetWaitTask()
+        private async Task StartAlarmTimerAsync()
         {
-            var alarmTimerTask = new Task(
-                () => 
-                {
-                    var timer = new AlarmTimer();
-                    timer.WaitUntil(_alarmTime);
-                }
-                );
-            return alarmTimerTask;
+            var timer = new AlarmTimer();
+            timer.WaitUntil(_alarmTime);
         }
 
-        private Task GetLedPulserTask()
+        private async Task StartLedSignOfLifeAsync()
         {
-            var pulserTask = new Task(
-                () =>
-                {
-                    int i = 0;
-                    while (!_alarmFired && i < int.MaxValue)
-                    {
-                        i++;
-                        var percentage = (int) (50*(1 + Math.Sin( i / 20f )));
-                        _pwmController.Led0.On(percentage);   
-                        Thread.Sleep(50);
-                    }
-                }
-                );
-            return pulserTask;
+            int i = 0;
+            Log.Info("Sign of life: on");
+            while (!_alarmFired && i < int.MaxValue)
+            {
+                i++;
+                var percentage = (int) (50*(1 + Math.Sin(i/20f)));
+                _pwmController.Led0.On(percentage);
+                await Task.Delay(50).ConfigureAwait(false);
+            }
+            Log.Info("Sign of life: off");
         }
 
 
         private void ActivateAlarm()
         {
+            var bellsRunFor = TimeSpan.FromSeconds(10);
             _alarmFired = true;
             Log.Info("Jingle Bells!");
             _pwmController.DcMotor.Go(100);
-            Thread.Sleep(10000);
+            Thread.Sleep(bellsRunFor);
+            Log.InfoFormat("Jingle Bell ran for {0}s!", bellsRunFor.TotalSeconds);
         }
+
+        #endregion
+
     }
 }

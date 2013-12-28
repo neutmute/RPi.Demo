@@ -32,6 +32,13 @@ namespace RPi.ConsoleApp
             Log  = LogManager.GetCurrentClassLogger();
             var options = new ConsoleOptions(args);
 
+            if (options.ShowHelp)
+            {
+                Console.WriteLine("Options:");
+                options.OptionSet.WriteOptionDescriptions(Console.Out);
+                return;
+            }
+
             var deviceFactory = new Pca9685DeviceFactory();
             var device = deviceFactory.GetDevice(options.UseFakeDevice);
             var motorController = new PwmController(device);

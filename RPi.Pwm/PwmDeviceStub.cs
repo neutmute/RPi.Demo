@@ -12,7 +12,7 @@ namespace RPi.Pwm
         private readonly static ILog Log = LogManager.GetCurrentClassLogger();
         public void SetPwmUpdateRate(int frequencyHz)
         {
-            Log.Info(m => m("Stub:SetPwmUpdateRate({0})", frequencyHz));
+            Log.Debug(m => m("Stub:SetPwmUpdateRate({0})", frequencyHz));
         }
 
         public void SetPwm(PwmChannel channel, int on, int off)
@@ -22,7 +22,7 @@ namespace RPi.Pwm
 
         public void SetFull(PwmChannel channel, bool fullOn)
         {
-            Log.Info(m => m("Stub:SetPwm({0},{1})", channel, fullOn));
+            Log.Debug(m => m("Stub:SetPwm({0},{1})", channel, fullOn));
         }
     }
 }

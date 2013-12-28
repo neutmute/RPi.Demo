@@ -24,24 +24,20 @@ namespace RPi.ConsoleApp
         public DateTime AlarmDate { get; set; }
         public bool UseFakeDevice { get; set; }
 
-        private bool _showHelp;
+        public bool ShowHelp;
+
+        public OptionSet OptionSet { get; private set; }
 
         public ConsoleOptions(string[] args)
         {
-            var p = new OptionSet {
+            OptionSet = new OptionSet {
                 { "m|mode=",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
                 { "a|alarmdate=",  v => {AlarmDate =  DateTime.Parse(v); Mode = Mode.AlarmClock;}},
                 { "t|alarmtime=",  v => {AlarmDate =  DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
                 { "f|usefake=",  v => {UseFakeDevice = bool.Parse(v);}},
-                { "h|?:", v => _showHelp = true }
+                { "h|?:", v => ShowHelp = true }
             };
-            p.Parse(args);
-
-            if (_showHelp)
-            {
-                Console.WriteLine("Options:");
-                p.WriteOptionDescriptions(Console.Out);
-            }
+            OptionSet.Parse(args);
         }
 
         public override string ToString()
