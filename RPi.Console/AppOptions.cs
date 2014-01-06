@@ -14,7 +14,8 @@ namespace RPi.ConsoleApp
         Stepper,
         Led,
         RawPwm,
-        AlarmClock
+        AlarmClock,
+        SignalRTest
     }
 
     public class ConsoleOptions
@@ -23,6 +24,7 @@ namespace RPi.ConsoleApp
 
         public DateTime AlarmDate { get; set; }
         public bool UseFakeDevice { get; set; }
+        public bool SignalRConnect { get; set; }
 
         public bool ShowHelp;
 
@@ -34,7 +36,6 @@ namespace RPi.ConsoleApp
                 { "m|mode=",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
                 { "a|alarmdate=",  v => {AlarmDate =  DateTime.Parse(v); Mode = Mode.AlarmClock;}},
                 { "t|alarmtime=",  v => {AlarmDate =  DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
-                { "f|usefake=",  v => {UseFakeDevice = bool.Parse(v);}},
                 { "h|?:", v => ShowHelp = true }
             };
             OptionSet.Parse(args);
@@ -42,12 +43,16 @@ namespace RPi.ConsoleApp
 
         public override string ToString()
         {
-            return string.Format(
-                "Mode={1}{0}AlarmDate={2:yyyy-MM-dd HH:mm:ss}{0}"
-                , Environment.NewLine
-                , Mode
-                , AlarmDate
-               );
+            var s = new StringBuilder();
+
+            s.AppendFormat("Mode={0}", Mode);
+
+            if (Mode == Mode.AlarmClock)
+            {
+                s.AppendFormat("{0}AlarmDate={1:yyyy-MM-dd HH:mm:ss}{0}", Environment.NewLine, AlarmDate);
+            }
+
+            return s.ToString();
         }
 
     }

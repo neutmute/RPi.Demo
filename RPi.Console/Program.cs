@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
+using Microsoft.AspNet.SignalR.Client;
 using Raspberry.IO.Components.Controllers.Pca9685;
+using RPi.ConsoleApp.Comms;
 using RPi.Pwm;
 using RPi.Pwm.Motors;
 
@@ -44,7 +46,7 @@ namespace RPi.ConsoleApp
             var motorController = new PwmController(device);
             motorController.Init();
 
-            //Log.InfoFormat("RPi.Console running with {0}", options);
+            Log.InfoFormat("RPi.Console running with {0}", options);
 
             switch (options.Mode)
             {
@@ -72,6 +74,11 @@ namespace RPi.ConsoleApp
                     var alarmClock = new AlarmClock(motorController);
                     alarmClock.Set(options.AlarmDate);
                     alarmClock.WaitForAlarm();
+                    break;
+
+                case Mode.SignalRTest:
+                    var signalRConnection = new SignalRConnection();
+                    signalRConnection.Run();
                     break;
             }
 
