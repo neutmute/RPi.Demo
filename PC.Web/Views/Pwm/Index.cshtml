@@ -2,4 +2,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>PWM </h2>
+@using (Html.BeginForm("Servo", "Pwm"))
+{
+    @Html.TextBox("percent", string.Empty, new { style = "width:150px;" })
+    <input type="submit" value="Servo" />
+}
+
+@using (Html.BeginForm("Ping", "Pwm"))
+{
+    <input type="submit" value="Ping" />
+}

@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using NLog;
 
 namespace PC.Web
 {
@@ -14,8 +15,12 @@ namespace PC.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         protected void Application_Start()
         {
+            Log.Info("PC.Web starting");
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

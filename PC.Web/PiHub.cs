@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using NLog;
 
 namespace PC.Web
 {
@@ -43,16 +45,19 @@ namespace PC.Web
     }
 
 
-public class PiHub : Hub
+    public class PiHub : Hub
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public void Hello()
         {
-            Clients.All.notify();
+            Log.Info("Hello received");
+            //PiController.Instance.SetServo(90);
         }
 
-        public PiHub()
+        public override Task OnConnected()
         {
-            
+            Log.Info("Connection from {0}", Context.ConnectionId);
+            return base.OnConnected();
         }
     }
 }
