@@ -3,7 +3,7 @@
 }
 
 <h2>PWM </h2>
-@using (Html.BeginForm("Servo", "Pwm"))
+@using (Html.BeginForm("Servo", "Pwm", FormMethod.Post))
 {
     @Html.TextBox("percent", string.Empty, new { style = "width:150px;" })
     <input type="submit" value="Servo" />

@@ -35,12 +35,12 @@ namespace PC.Web
 
         public void SetServo(int percent)
         {
-            Clients.All().SetServo(percent);
+            Clients.All.SetServo(percent);
         }
 
         public void Ping()
         {
-            Clients.All().Ping();
+            Clients.All.Ping();
         }
     }
 

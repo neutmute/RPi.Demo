@@ -50,17 +50,19 @@ namespace RPi.ConsoleApp.Comms
         public async Task WaitForKill()
         {
             Log.Info("Waiting for kill");
-            while (!_killReceived)
-            {
-                Task.Delay(100);
-            }
+
+            new System.Threading.AutoResetEvent(false).WaitOne();
+
             Log.Info("Kill received!");
         }
 
         public async Task Start()
         {
-            Log.Info("Connecting...");
-            _hubConnection = new HubConnection("http://192.168.1.3:15794/");
+            //var url = "http://192.168.1.3:15794/";
+            var url = "http://192.168.1.3/rpi.pc.web";
+            Log.InfoFormat("Connecting to {0}...", url);
+            
+            _hubConnection = new HubConnection(url);
             _hubConnection.TraceLevel = TraceLevels.All;
             _hubConnection.TraceWriter = Console.Out;
 
