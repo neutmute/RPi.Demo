@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
 using Microsoft.AspNet.SignalR.Client;
+using RPi.Comms;
 
 namespace RPi.ConsoleApp.Comms
 {
@@ -67,7 +68,7 @@ namespace RPi.ConsoleApp.Comms
             _hubConnection.TraceWriter = Console.Out;
 
             _piHubProxy = _hubConnection.CreateHubProxy("PiHub");
-            _piHubProxy.On("SetServo", (int percent) => Log.InfoFormat("SetServo({0})!", percent));
+            _piHubProxy.On<RpiCommand>("SendCommand", c => Log.InfoFormat("SendCommand({0})!", c));
 
             _hubConnection.StateChanged += _hubConnection_StateChanged;
             _hubConnection.Start();

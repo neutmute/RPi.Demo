@@ -6,6 +6,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using NLog;
+using RPi.Comms;
 
 namespace PC.Web
 {
@@ -33,14 +34,9 @@ namespace PC.Web
             set;
         }
 
-        public void SetServo(int percent)
+        public void SendCommand(RpiCommand command)
         {
-            Clients.All.SetServo(percent);
-        }
-
-        public void Ping()
-        {
-            Clients.All.Ping();
+            Clients.All.SendCommand(command);
         }
     }
 
@@ -50,8 +46,7 @@ namespace PC.Web
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         public void Hello()
         {
-            Log.Info("Hello received");
-            //PiController.Instance.SetServo(90);
+            Log.Info("Hello received!");
         }
 
         public override Task OnConnected()

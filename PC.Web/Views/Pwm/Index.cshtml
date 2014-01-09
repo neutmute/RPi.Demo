@@ -3,13 +3,39 @@
 }
 
 <h2>PWM </h2>
-@using (Html.BeginForm("Servo", "Pwm", FormMethod.Post))
+@using (Html.BeginForm("Led", "Pwm", FormMethod.Post))
 {
-    @Html.TextBox("percent", string.Empty, new { style = "width:150px;" })
-    <input type="submit" value="Servo" />
+    <fieldset>
+        <legend>LED</legend>
+        @Html.TextBox("percent", string.Empty, new { @class = "input-mini" })
+        <button type="submit" class="btn">Set Led</button>
+    </fieldset>
 }
 
-@using (Html.BeginForm("Ping", "Pwm"))
+@using (Html.BeginForm("Servo", "Pwm", FormMethod.Post))
 {
-    <input type="submit" value="Ping" />
+    <fieldset>
+        <legend>Servo</legend>
+        @Html.TextBox("percent", string.Empty, new { @class = "input-mini" })
+        <button type="submit" class="btn">Set Servo</button>
+    </fieldset>
+}
+
+@using (Html.BeginForm("DcMotor", "Pwm", FormMethod.Post))
+{
+    <fieldset>
+        <legend>DC Motor</legend>
+        @Html.TextBox("percent", string.Empty, new { @class = "input-mini" })
+        <button type="submit" class="btn">Set DC</button>
+    </fieldset>
+}
+
+@using (Html.BeginForm("Stepper", "Pwm", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Stepper</legend>
+        @Html.TextBox("steps", string.Empty, new { @class = "input-mini", placeholder="steps" })
+        @Html.TextBox("delayMs", string.Empty, new { @class = "input-mini", placeholder = "delay" })
+        <button type="submit" class="btn">Step</button>
+    </fieldset>
 }

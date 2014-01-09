@@ -44,8 +44,9 @@
     <Reference Include="Common.Logging.NLog20">
       <HintPath>..\packages\Common.Logging.NLog20.2.1.2\lib\net40\Common.Logging.NLog20.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Client">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.0.1\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.AspNet.SignalR.Client.dll</HintPath>
     </Reference>
     <Reference Include="NDesk.Options">
       <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
@@ -80,6 +81,10 @@
     <ProjectReference Include="..\..\raspberry-sharp-io\Raspberry.IO.GeneralPurpose\Raspberry.IO.GeneralPurpose.csproj">
       <Project>{281c71ed-c36d-408e-8baa-75c381dc17e7}</Project>
       <Name>Raspberry.IO.GeneralPurpose</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RPi.Comms\RPi.Comms.csproj">
+      <Project>{aeecae23-d46e-4f64-91b3-c0b50bc2483e}</Project>
+      <Name>RPi.Comms</Name>
     </ProjectReference>
     <ProjectReference Include="..\RPi.Pwm\RPi.Pwm.csproj">
       <Project>{552a044b-139f-4f45-96a0-0698a05c52d9}</Project>

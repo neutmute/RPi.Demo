@@ -228,6 +228,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RPi.Comms\RPi.Comms.csproj">
+      <Project>{aeecae23-d46e-4f64-91b3-c0b50bc2483e}</Project>
+      <Name>RPi.Comms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RPi.Console\RPi.Console.csproj">
       <Project>{2a6e1f02-84db-43bc-84b0-753f68c1c987}</Project>
       <Name>RPi.Console</Name>
