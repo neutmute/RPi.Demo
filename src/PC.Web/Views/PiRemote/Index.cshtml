@@ -8,45 +8,57 @@
     <div data-role="header">
         <h1>Pi Remote</h1>
     </div>
-    <div class="ui-grid-a">
 
-        @using (Html.BeginForm("Led", "Pwm", FormMethod.Post))
-        {
-            <label for="sliderLed">LED</label>
-            <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range">
-        }
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>LED</h3>
 
-        @using (Html.BeginForm("Servo", "Pwm", FormMethod.Post))
-        {
-            <label for="sliderServo">Servo</label>
-            <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range">
-        }
-
-        @using (Html.BeginForm("DcMotor", "Pwm", FormMethod.Post))
-        {
-            <label for="sliderDcMotor">DC Motor</label>
-            <input name="sliderDcMotor" id="sliderDcMotor" min="0" max="100" value="50" type="range">
+            @using (Html.BeginForm("Led", "Pwm", FormMethod.Post))
+            {
+                <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range">
             }
-        
-       
-        
-            <h3>Step</h3>
-            <fieldset>
-            <legend>Stepper</legend>
+        </div>
+    </div>
+
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>Servo</h3>
+
+            @using (Html.BeginForm("Servo", "Pwm", FormMethod.Post))
+            {
+                <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range">
+            }
+        </div>
+    </div>
+
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>DC Motor</h3>
+
+            @using (Html.BeginForm("DcMotor", "Pwm", FormMethod.Post))
+            {
+                <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range">
+            }
+        </div>
+    </div>
+
+
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>Stepper</h3>
 
             @using (Html.BeginForm("Stepper", "Pwm", FormMethod.Post))
             {
                 <label for="sliderStepperSteps">Steps</label>
-                <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="100" value="50" type="range">
+                <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="1000" value="50" type="range">
 
-                <label for="sliderStepperDelay">Step Delay</label>
-                <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="50" type="range">
+                <label for="sliderStepperDelay">Delay (ms)</label>
+                <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="6" type="range">
 
                 <input type="button" value="Step">
             }
-
-        </fieldset>
-
+        </div>
     </div>
+
 
 </div>

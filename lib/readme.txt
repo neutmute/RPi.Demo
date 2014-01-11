@@ -1,0 +1,1 @@
+Microsoft.AspNet.SignalR.Client is the mono compiled version. not from nuget
