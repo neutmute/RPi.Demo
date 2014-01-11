@@ -23,6 +23,8 @@ namespace PC.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+
+            
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
@@ -38,6 +40,19 @@ namespace PC.Web
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+
+            bundles.Add(new StyleBundle("~/bundles/jquery.mobile/css").Include(
+                "~/Content/jquery.mobile-{version}.css"
+                , "~/Content/jquery.mobile.theme-{version}.css"
+                ));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery.mobile").Include(
+                        "~/Scripts/jquery.mobile-*"
+                        ,"~/Scripts/jquery-{version}.js"
+                        ));
+
         }
     }
 }

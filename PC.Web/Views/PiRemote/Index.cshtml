@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/jQueryMobile.cshtml";
+}
+
+
+<div role="main" class="ui-content">
+    <div data-role="header">
+        <h1>Pi Remote</h1>
+    </div>
+    <div class="ui-grid-a">
+
+        @using (Html.BeginForm("Led", "Pwm", FormMethod.Post))
+        {
+            <label for="sliderLed">LED</label>
+            <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range">
+        }
+
+        @using (Html.BeginForm("Servo", "Pwm", FormMethod.Post))
+        {
+            <label for="sliderServo">Servo</label>
+            <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range">
+        }
+
+        @using (Html.BeginForm("DcMotor", "Pwm", FormMethod.Post))
+        {
+            <label for="sliderDcMotor">DC Motor</label>
+            <input name="sliderDcMotor" id="sliderDcMotor" min="0" max="100" value="50" type="range">
+            }
+        
+       
+        
+            <h3>Step</h3>
+            <fieldset>
+            <legend>Stepper</legend>
+
+            @using (Html.BeginForm("Stepper", "Pwm", FormMethod.Post))
+            {
+                <label for="sliderStepperSteps">Steps</label>
+                <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="100" value="50" type="range">
+
+                <label for="sliderStepperDelay">Step Delay</label>
+                <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="50" type="range">
+
+                <input type="button" value="Step">
+            }
+
+        </fieldset>
+
+    </div>
+
+</div>
