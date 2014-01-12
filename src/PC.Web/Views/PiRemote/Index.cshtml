@@ -50,12 +50,12 @@
             @using (Html.BeginForm("Stepper", "Pwm", FormMethod.Post))
             {
                 <label for="sliderStepperSteps">Steps</label>
-                <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="1000" value="50" type="range">
+    <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="1000" value="50" type="range" data-bind="value: stepSteps">
 
                 <label for="sliderStepperDelay">Delay (ms)</label>
-                <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="6" type="range">
+    <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="6" type="range" data-bind="value: stepDelayMs">
 
-                <input type="button" value="Step">
+                <input type="button" value="Step" data-bind="click:runStepper">
             }
         </div>
     </div>
@@ -73,6 +73,8 @@
             this.pwmLed = ko.observable();
             this.pwmDcMotor = ko.observable();
             this.pwmServo = ko.observable();
+            this.stepSteps = ko.observable();
+            this.stepDelayMs = ko.observable();
 
             this.init = function () {
 
@@ -115,6 +117,13 @@
                         .fail(self.handleError);
                 }
             };
+
+            this.runStepper = function () {
+                if (connected) {
+                    self.remoteHubProxy.server.runStepper(self.stepSteps(), self.stepDelayMs())
+                        .fail(self.handleError);
+                }
+            }
 
             this.pwmLed.subscribe(self.sendLed);
             this.pwmDcMotor.subscribe(self.sendDcMotor);

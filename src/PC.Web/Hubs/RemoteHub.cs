@@ -33,5 +33,13 @@ namespace PC.Web.Hubs
             piCommand.PwmCommands.Add(new PwmCommand(channel, value));
             PiController.Instance.SendCommand(piCommand);
         }
+
+        public void RunStepper(int steps, int delayMs)
+        {
+            Log.Info("RunStepper({0},{1})", steps, delayMs);
+            var stepperCommand = new StepperCommand(steps, delayMs);
+            var piCommand = new RpiCommand {Stepper = stepperCommand};
+            PiController.Instance.SendCommand(piCommand);
+        }
     }
 }
