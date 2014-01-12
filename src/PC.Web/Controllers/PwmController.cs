@@ -20,28 +20,28 @@ namespace PC.Web.Controllers
         }
 
 
-        public ActionResult Servo(int percent)
-        {
-            PiController.Instance.SendCommand(new RpiCommand{Servo = new PwmCommand(percent)});
-            return RedirectToAction("Index");
-        }
+        //public ActionResult Servo(int percent)
+        //{
+        //    PiController.Instance.SendCommand(new RpiCommand{Servo = new PwmCommand(percent)});
+        //    return RedirectToAction("Index");
+        //}
 
-        public ActionResult DcMotor(int percent)
-        {
-            PiController.Instance.SendCommand(new RpiCommand { DcMotor = new PwmCommand(percent) });
-            return RedirectToAction("Index");
-        }
+        //public ActionResult DcMotor(int percent)
+        //{
+        //    PiController.Instance.SendCommand(new RpiCommand { DcMotor = new PwmCommand(percent) });
+        //    return RedirectToAction("Index");
+        //}
 
-        public ActionResult Led(int percent)
-        {
-            PiController.Instance.SendCommand(new RpiCommand { Led = new PwmCommand(percent) });
-            return RedirectToAction("Index");
-        }
+        //public ActionResult Led(int percent)
+        //{
+        //    PiController.Instance.SendCommand(new RpiCommand { Led = new PwmCommand(percent) });
+        //    return RedirectToAction("Index");
+        //}
 
-        public ActionResult Stepper(int steps, int delayMs)
-        {
-            PiController.Instance.SendCommand(new RpiCommand { Stepper = new StepperCommand(steps, delayMs) });
-            return RedirectToAction("Index");
-        }
+        //public ActionResult Stepper(int steps, int delayMs)
+        //{
+        //    PiController.Instance.SendCommand(new RpiCommand { Stepper = new StepperCommand(steps, delayMs) });
+        //    return RedirectToAction("Index");
+        //}
     }
 }

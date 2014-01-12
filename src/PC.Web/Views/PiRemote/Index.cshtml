@@ -15,7 +15,7 @@
 
             @using (Html.BeginForm("Led", "Pwm", FormMethod.Post))
             {
-                <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range">
+                <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range" data-bind="value: pwmLed">
             }
         </div>
     </div>
@@ -26,7 +26,7 @@
 
             @using (Html.BeginForm("Servo", "Pwm", FormMethod.Post))
             {
-                <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range">
+                <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range" data-bind="value: pwmServo">
             }
         </div>
     </div>
@@ -37,7 +37,7 @@
 
             @using (Html.BeginForm("DcMotor", "Pwm", FormMethod.Post))
             {
-                <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range">
+                <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range" data-bind="value: pwmDcMotor">
             }
         </div>
     </div>
@@ -59,6 +59,81 @@
             }
         </div>
     </div>
-
-
 </div>
+
+@section Scripts {
+    <script src="~/signalr/hubs"></script>
+    <script>
+
+        function piRemoteViewModel() {
+            var self = this;
+            this.remoteHubProxy = $.connection.remoteHub;
+            var connected = false;
+
+            this.pwmLed = ko.observable();
+            this.pwmDcMotor = ko.observable();
+            this.pwmServo = ko.observable();
+
+            this.init = function () {
+
+                this.remoteHubProxy.server.ping()
+                    .done(this.handlePingResult)
+                    .fail(this.handleError);
+
+                connected = true;
+            }
+
+            this.handlePingResult = function () {
+                console.log("ping'd server ok");
+            }
+
+            this.handleError = function (error) {
+                console.warn(error);
+            }
+
+            this.notifyPiConnected = function () {
+                console.log("A Pi has connected");
+            }
+
+            this.sendLed = function () {
+                if (connected) {
+                    self.remoteHubProxy.server.setPwm("Led", self.pwmLed())
+                        .fail(self.handleError);
+                }
+            };
+
+            this.sendDcMotor = function () {
+                if (connected) {
+                    self.remoteHubProxy.server.setPwm("DcMotor", self.pwmDcMotor())
+                        .fail(self.handleError);
+                }
+            };
+
+            this.sendServo = function () {
+                if (connected) {
+                    self.remoteHubProxy.server.setPwm("Servo", self.pwmServo())
+                        .fail(self.handleError);
+                }
+            };
+
+            this.pwmLed.subscribe(self.sendLed);
+            this.pwmDcMotor.subscribe(self.sendDcMotor);
+            this.pwmServo.subscribe(self.sendServo);
+        }
+
+
+        $(document).ready(function () {
+
+            var remoteHubProxy = $.connection.remoteHub;
+
+            var viewModel = new piRemoteViewModel();
+            ko.applyBindings(viewModel);
+
+            remoteHubProxy.client.notifyPiConnected = viewModel.notifyPiConnected;
+
+            $.connection.hub.start().done(function () {
+                viewModel.init();
+            });
+        });
+    </script>
+}

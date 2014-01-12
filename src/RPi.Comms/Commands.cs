@@ -1,75 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace RPi.Comms
 {
-        public struct StepperCommand
+    public enum PwmChannel
+    {
+        Unknown,
+        Led,
+        Servo,
+        DcMotor
+    }
+
+    public struct StepperCommand
+    {
+        public int Steps { get; set; }
+
+        public int DelayMs { get; set; }
+
+        public StepperCommand(int steps, int delayMs) : this()
         {
-            public int Steps { get; set; }
-
-            public int DelayMs { get; set; }
-
-            public StepperCommand(int steps, int delayMs) : this()
-            {
-                Steps = steps;
-                DelayMs = delayMs;
-            }
-
-            public override string ToString()
-            {
-                return string.Format("Steps={0}, Delay={1}", Steps, DelayMs);
-            }
+            Steps = steps;
+            DelayMs = delayMs;
         }
 
-        public struct PwmCommand
+        public override string ToString()
         {
-            public int DutyCyclePercent;
+            return string.Format("Steps={0}, Delay={1}", Steps, DelayMs);
+        }
+    }
 
-            public PwmCommand(int dutyCyclePercent)
-            {
-                DutyCyclePercent = dutyCyclePercent;
-            }
+    public struct PwmCommand
+    {
+        public PwmChannel Channel;
 
-            public override string ToString()
-            {
-                return string.Format("{0}%", DutyCyclePercent);
-            }
+        public int DutyCyclePercent;
+
+        public PwmCommand(PwmChannel channel, int dutyCyclePercent)
+        {
+            Channel = channel;
+            DutyCyclePercent = dutyCyclePercent;
         }
 
-        public class RpiCommand
+        public override string ToString()
         {
-            public PwmCommand? Led { get; set; }
-
-            public PwmCommand? Servo { get; set; }
-
-            public PwmCommand? DcMotor { get; set; }
-
-            public StepperCommand? Stepper { get; set; }
-
-            public override string ToString()
-            {
-                var sb = new StringBuilder();
-
-                Action<string, PwmCommand?> pwmCommandBuilder = (name, command) =>
-                {
-                    if (command.HasValue)
-                    {
-                        sb.AppendFormat("{0}={1};", name, command);
-                    }
-                };
-
-                pwmCommandBuilder("Led", Led);
-                pwmCommandBuilder("Servo", Servo);
-                pwmCommandBuilder("DcMotor", DcMotor);
-
-                if (Stepper.HasValue)
-                {
-                    sb.AppendFormat("Stepper={0};", Stepper);
-                }
-
-                return sb.ToString();
-            }
+            return string.Format("{0}={1}%", Channel, DutyCyclePercent);
         }
+    }
+
+    public class RpiCommand
+    {
+        public List<PwmCommand> PwmCommands { get; set; }
+
+        public StepperCommand? Stepper { get; set; }
+
+        public RpiCommand()
+        {
+            PwmCommands = new List<PwmCommand>();
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            PwmCommands.ForEach(pwmC => sb.AppendFormat("{0}; ", pwmC));
+
+            if (Stepper.HasValue)
+            {
+                sb.AppendFormat("Stepper={0};", Stepper);
+            }
+
+            return sb.ToString();
+        }
+    }
 }
