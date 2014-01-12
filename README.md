@@ -21,3 +21,6 @@ The project uses:
 A lego ping pong launcher was constructed to showcase the motors in action.
 
 ![Breadboard](http://raw.github.com/neutmute/RPi.Demo/master/RPi.Slides/Content/slides/lego.jpg)
+
+The original code used Mono 2 and a WinForms app for the UI.
+The code now targets mono 3 and uses an IIS Windows based MVC app running SignalR to communicate with the pi's console app.
