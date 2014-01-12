@@ -7,16 +7,28 @@ using System.Threading.Tasks;
 using Common.Logging;
 using Microsoft.AspNet.SignalR.Client;
 using RPi.Comms;
+using RPi.Pwm;
+using RPi.Pwm.Motors;
 
 namespace RPi.ConsoleApp.Comms
 {
     class SignalRConnection
     {
+        #region Fields
+
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private IHubProxy _piHubProxy;
         private HubConnection _hubConnection;
         private bool _connectionStable;
         private bool _killReceived;
+        private PwmController _pwmController;
+        #endregion
+
+        public SignalRConnection(PwmController pwmController)
+        {
+            _pwmController = pwmController;
+        }
+
 
         public async void Run()
         {
@@ -31,7 +43,7 @@ namespace RPi.ConsoleApp.Comms
             }
             else
             {
-                Log.InfoFormat("No connection, no hello.");
+                Log.WarnFormat("No connection, no hello.");
             }
 
             Log.Info("Wait!");
@@ -57,6 +69,35 @@ namespace RPi.ConsoleApp.Comms
             Log.Info("Kill received!");
         }
 
+        public void CommandReceived(RpiCommand command)
+        {
+            Log.InfoFormat("CommandReceived({0})!", command);
+            foreach(PwmCommand pwmCommand in command.PwmCommands)
+            {
+                switch (pwmCommand.Channel)
+                {
+                    case PwmChannel.DcMotor:
+                        var percent = pwmCommand.DutyCyclePercent;
+                        var direction = percent > 0 ? MotorDirection.Forward:MotorDirection.Reverse;
+                        _pwmController.DcMotor.Go(Math.Abs(percent), direction);
+                        break;
+                    case PwmChannel.Led:
+                        _pwmController.Led0.On(pwmCommand.DutyCyclePercent);
+                        break;
+                    case PwmChannel.Servo:
+                        _pwmController.Servo.MoveTo(pwmCommand.DutyCyclePercent);
+                        break;
+                }
+            }
+
+            if (command.Stepper.HasValue)
+            {
+                _pwmController.Stepper.StepDelayMs = command.Stepper.Value.DelayMs;
+                _pwmController.Stepper.Rotate(command.Stepper.Value.Steps);
+            }
+
+        }
+
         public async Task Start()
         {
             //var url = "http://192.168.1.3:15794/";
@@ -68,7 +109,7 @@ namespace RPi.ConsoleApp.Comms
             _hubConnection.TraceWriter = Console.Out;
 
             _piHubProxy = _hubConnection.CreateHubProxy("PiHub");
-            _piHubProxy.On<RpiCommand>("SendCommand", c => Log.InfoFormat("SendCommand({0})!", c));
+            _piHubProxy.On<RpiCommand>("SendCommand", CommandReceived);
 
             _hubConnection.StateChanged += _hubConnection_StateChanged;
             _hubConnection.Start();
@@ -84,3 +125,4 @@ namespace RPi.ConsoleApp.Comms
         }
     }
 }
+

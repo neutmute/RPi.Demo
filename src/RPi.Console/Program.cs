@@ -77,7 +77,7 @@ namespace RPi.ConsoleApp
                     break;
 
                 case Mode.SignalRTest:
-                    var signalRConnection = new SignalRConnection();
+                    var signalRConnection = new SignalRConnection(motorController);
                     signalRConnection.Run();
                     break;
             }

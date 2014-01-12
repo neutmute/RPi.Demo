@@ -19,8 +19,7 @@ namespace RPi.ConsoleApp
         private bool _alarmFired;
 
         #endregion
-
-
+        
         #region Ctor
 
         public AlarmClock(PwmController pwmController)
@@ -29,8 +28,7 @@ namespace RPi.ConsoleApp
         }
 
         #endregion
-
-
+        
         #region Methods
 
         public void Set(DateTime alarmTime)
@@ -86,6 +84,5 @@ namespace RPi.ConsoleApp
         }
 
         #endregion
-
     }
 }
