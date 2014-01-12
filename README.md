@@ -24,3 +24,5 @@ A lego ping pong launcher was constructed to showcase the motors in action.
 
 The original code used Mono 2 and a WinForms app for the UI.
 The code now targets mono 3 and uses an IIS Windows based MVC app running SignalR to communicate with the pi's console app.
+
+The solution expects the raspberry-sharp-io repo to be checked out into a sibling directory.
