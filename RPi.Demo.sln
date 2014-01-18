@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PC.Web", "src\PC.Web\PC.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.Comms", "src\RPi.Comms\RPi.Comms.csproj", "{AEECAE23-D46E-4F64-91B3-C0B50BC2483E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPi.Nancy", "src\RPi.Nancy\RPi.Nancy.csproj", "{9E5F19D6-B3D3-44D9-8123-42C8B6EFC49B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{AEECAE23-D46E-4F64-91B3-C0B50BC2483E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEECAE23-D46E-4F64-91B3-C0B50BC2483E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEECAE23-D46E-4F64-91B3-C0B50BC2483E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5F19D6-B3D3-44D9-8123-42C8B6EFC49B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5F19D6-B3D3-44D9-8123-42C8B6EFC49B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5F19D6-B3D3-44D9-8123-42C8B6EFC49B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5F19D6-B3D3-44D9-8123-42C8B6EFC49B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
