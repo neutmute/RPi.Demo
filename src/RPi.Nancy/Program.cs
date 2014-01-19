@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Hosting;
 using Nancy.Hosting.Self;
 using Common.Logging;
@@ -47,7 +46,7 @@ namespace RPi.NancyHost
     {
         public void Configuration(IAppBuilder app)
         {
-            app.MapSignalR();
+          //  app.MapSignalR();
             app.UseNancy();
         }
     }
