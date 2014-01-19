@@ -23,15 +23,18 @@ namespace RPi.NancyHost
         private void Run()
         {
             Log = LogManager.GetCurrentClassLogger();
-
-            var webUrl = "http://localhost:1234";
-            var signalRurl = "http://localhost:1235";
             
-            Log.InfoFormat("rpi.nancy starting on {0}", webUrl);
+            var options = new StartOptions
+            {
+                ServerFactory = "Nowin",
+                Port = 8080
+            };
+
+            Log.InfoFormat("rpi.nancy starting on port={0}", options.Port);
 
             //using (var webHost = new Nancy.Hosting.Self.NancyHost(new Uri(webUrl)))
             //{
-                using (WebApp.Start<Startup>(signalRurl))
+            using (WebApp.Start<Startup>(options))
                 {
                     //webHost.Start();
                     Console.Write("Press any key");
@@ -46,7 +49,7 @@ namespace RPi.NancyHost
     {
         public void Configuration(IAppBuilder app)
         {
-          //  app.MapSignalR();
+            app.MapSignalR();
             app.UseNancy();
         }
     }

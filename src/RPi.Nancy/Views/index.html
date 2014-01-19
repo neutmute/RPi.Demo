@@ -1,4 +1,130 @@
 ﻿@Master['master.html']
 @Section['Content']
-   This is content on the index page
+
+<div role="main" class="ui-content">
+    <div data-role="header">
+        <h1>Pi Remote</h1>
+    </div>
+
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>LED</h3>
+            <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range" data-bind="value: pwmLed">
+        </div>
+    </div>
+
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>Servo</h3>
+            <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range" data-bind="value: pwmServo">
+        </div>
+    </div>
+
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>DC Motor</h3>
+            <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range" data-bind="value: pwmDcMotor">
+        </div>
+    </div>
+
+
+    <div data-role="collapsible-set" data-content-theme="d" id="set">
+        <div data-role="collapsible" id="set1" data-collapsed="false">
+            <h3>Stepper</h3>
+            <label for="sliderStepperSteps">Steps</label>
+            <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="1000" value="50" type="range" data-bind="value: stepSteps">
+
+            <label for="sliderStepperDelay">Delay (ms)</label>
+            <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="6" type="range" data-bind="value: stepDelayMs">
+
+            <input type="button" value="Step" data-bind="click:runStepper">
+        </div>
+    </div>
+</div>
+@EndSection
+
+@Section['Scripts']
+<script src="/signalr/hubs"></script>
+<script>
+
+    function piRemoteViewModel() {
+        var self = this;
+        this.remoteHubProxy = $.connection.remoteHub;
+        var connected = false;
+
+        this.pwmLed = ko.observable();
+        this.pwmDcMotor = ko.observable();
+        this.pwmServo = ko.observable();
+        this.stepSteps = ko.observable();
+        this.stepDelayMs = ko.observable();
+
+        this.init = function () {
+
+            this.remoteHubProxy.server.ping()
+                .done(this.handlePingResult)
+                .fail(this.handleError);
+
+            connected = true;
+        }
+
+        this.handlePingResult = function () {
+            console.log("ping'd server ok");
+        }
+
+        this.handleError = function (error) {
+            console.warn(error);
+        }
+
+        this.notifyPiConnected = function () {
+            console.log("A Pi has connected");
+        }
+
+        this.sendLed = function () {
+            if (connected) {
+                self.remoteHubProxy.server.setPwm("Led", self.pwmLed())
+                    .fail(self.handleError);
+            }
+        };
+
+        this.sendDcMotor = function () {
+            if (connected) {
+                self.remoteHubProxy.server.setPwm("DcMotor", self.pwmDcMotor())
+                    .fail(self.handleError);
+            }
+        };
+
+        this.sendServo = function () {
+            if (connected) {
+                self.remoteHubProxy.server.setPwm("Servo", self.pwmServo())
+                    .fail(self.handleError);
+            }
+        };
+
+        this.runStepper = function () {
+            if (connected) {
+                self.remoteHubProxy.server.runStepper(self.stepSteps(), self.stepDelayMs())
+                    .fail(self.handleError);
+            }
+        }
+
+        this.pwmLed.subscribe(self.sendLed);
+        this.pwmDcMotor.subscribe(self.sendDcMotor);
+        this.pwmServo.subscribe(self.sendServo);
+    }
+
+
+    $(document).ready(function () {
+
+        var remoteHubProxy = $.connection.remoteHub;
+
+        var viewModel = new piRemoteViewModel();
+        ko.applyBindings(viewModel);
+
+        remoteHubProxy.client.notifyPiConnected = viewModel.notifyPiConnected;
+
+        $.connection.hub.start().done(function () {
+            viewModel.init();
+        });
+    });
+</script>
 @EndSection

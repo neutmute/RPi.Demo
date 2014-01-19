@@ -3,6 +3,11 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using RPi.Comms;
 
+namespace RPi.NancyHost.Hubs
+{
+    // allow code sharing with nancy console
+}
+
 namespace PC.Web
 {
     public class PiController

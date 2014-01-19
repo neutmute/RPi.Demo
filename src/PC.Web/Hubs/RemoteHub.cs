@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using NLog;
 using RPi.Comms;
+using RPi.NancyHost.Hubs;
 
 namespace PC.Web.Hubs
 {
