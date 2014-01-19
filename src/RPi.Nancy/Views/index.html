@@ -121,7 +121,8 @@
         ko.applyBindings(viewModel);
 
         remoteHubProxy.client.notifyPiConnected = viewModel.notifyPiConnected;
-
+        $.connection.hub.logging = true;
+        //{ transport: 'longPolling' }
         $.connection.hub.start().done(function () {
             viewModel.init();
         });

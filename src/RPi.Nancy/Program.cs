@@ -30,18 +30,15 @@ namespace RPi.NancyHost
                 Port = 8080
             };
 
-            Log.InfoFormat("rpi.nancy starting on port={0}", options.Port);
+            Log.InfoFormat("rpi.nancy starting on port={0}...", options.Port);
 
-            //using (var webHost = new Nancy.Hosting.Self.NancyHost(new Uri(webUrl)))
-            //{
             using (WebApp.Start<Startup>(options))
                 {
-                    //webHost.Start();
+                    Log.Info("...server started");
                     Console.Write("Press any key");
                     Console.ReadKey();
-                    //webHost.Stop();
+                    Log.Info("...server stopping");
                 }
-            //}
         }
     }
 
