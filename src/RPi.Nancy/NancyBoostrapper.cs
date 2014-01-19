@@ -17,6 +17,8 @@ namespace RPi.NancyHost
             conventions.StaticContentsConventions.Add(
                 StaticContentConventionBuilder.AddDirectory("Scripts", @"Scripts")
             );
+
+
         }
     }
 }
