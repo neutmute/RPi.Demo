@@ -22,7 +22,22 @@ A lego ping pong launcher was constructed to showcase the motors in action.
 
 ![Breadboard](http://raw.github.com/neutmute/RPi.Demo/master/RPi.Slides/Content/slides/lego.jpg)
 
-The original code used Mono 2 and a WinForms app for the UI.
-The code now targets mono 3 and uses an IIS Windows based MVC app running SignalR to communicate with the pi's console app.
+
 
 The solution expects the raspberry-sharp-io repo to be checked out into a sibling directory.
+
+## SignalR ##
+The original code at one point targeted Mono 2.x with a WinForms UI to allow interactive control of the motors (WinForms running in X-Windows).
+
+The current solution targets mono 3, uses async/await and has several SignalR configurations:
+
+1) Client-Server-Client topology.
+SignalR hub is hosted on IIS 8 with two hubs: one hub for a web browser remote control client using jQuery mobile; a second hub for the pi itself to connect to via the signalR c# client.
+This works well, apart from the requirement of IIS 8 as the mediator
+see: Rpi.Console with signalR mode
+
+2) Console app with an OWIN hosted webserver, using Nancy, SignalR and NoWin.
+SignalR on mono cannot host websockets and the transport falls back to Server Side Events.
+Response is very slow while dragging a slider backward and foward with several seconds lag before the server sees this response. see RPi.Nancy
+
+WinForms on mono 3.x is broken at the time of writing.  
