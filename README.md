@@ -14,13 +14,13 @@ The project uses:
 - [28BJY-48](https://github.com/neutmute/RPi.Demo/blob/master/Datasheets/28BYJ-48_Stepper.pdf?raw=true)  5V stepper
 - [ULN2003A](https://github.com/neutmute/RPi.Demo/blob/master/Datasheets/ULN2003A.pdf?raw=true) darlington array IC to drive the stepper
 
-![Circuit Diagram](http://raw.github.com/neutmute/RPi.Demo/master/RPi.Slides/Content/slides/circuit2.gif)
+![Circuit Diagram](http://raw.github.com/neutmute/RPi.Demo/master/src/RPi.Slides/Content/slides/circuit2.gif)
 
-![Breadboard](http://raw.github.com/neutmute/RPi.Demo/master/RPi.Slides/Content/slides/bb.jpg)
+![Breadboard](http://raw.github.com/neutmute/RPi.Demo/master/src/RPi.Slides/Content/slides/bb.jpg)
 
 A lego ping pong launcher was constructed to showcase the motors in action.
 
-![Breadboard](http://raw.github.com/neutmute/RPi.Demo/master/RPi.Slides/Content/slides/lego.jpg)
+![Breadboard](http://raw.github.com/neutmute/RPi.Demo/master/src/RPi.Slides/Content/slides/lego.jpg)
 
 
 
