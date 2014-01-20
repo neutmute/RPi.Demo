@@ -38,6 +38,7 @@ see: Rpi.Console with signalR mode
 
 2) Console app with an OWIN hosted webserver, using Nancy, SignalR and NoWin.
 SignalR on mono cannot host websockets and the transport falls back to Server Side Events.
-Response is very slow while dragging a slider backward and foward with several seconds lag before the server sees this response. see RPi.Nancy
+Response is very slow while dragging a slider backward and foward with several seconds lag before the server sees this response. see RPi.Nancy.
+Response is even slower using Katana as the web server.
 
 WinForms on mono 3.x is broken at the time of writing.  
