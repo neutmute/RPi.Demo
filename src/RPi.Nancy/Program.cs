@@ -23,22 +23,29 @@ namespace RPi.NancyHost
         private void Run()
         {
             Log = LogManager.GetCurrentClassLogger();
-            
+
             var options = new StartOptions
             {
-                ServerFactory = "Nowin",
-                Port = 8080
+                //ServerFactory = "Microsoft.Owin.Host.HttpListener"
+                ServerFactory = "Nowin"
             };
 
-            Log.InfoFormat("rpi.nancy starting on port={0}...", options.Port);
+            //var url = "http://*:8080"; // windows
+            var url = "http://192.168.1.64:8080"; // pi/mono
+
+            options.Urls.Add(url);
+
+            Log.InfoFormat("rpi.nancy starting on {0}...", url);
 
             using (WebApp.Start<Startup>(options))
-                {
-                    Log.Info("...server started");
-                    Console.Write("Press any key");
-                    Console.ReadKey();
-                    Log.Info("...server stopping");
-                }
+            {
+                Log.Info("...server started and listening");
+
+
+                Console.Write("Press any key to halt server");
+                Console.ReadKey();
+                Log.Info("server stopping...");
+            }
         }
     }
 

@@ -140,6 +140,7 @@
 
             remoteHubProxy.client.notifyPiConnected = viewModel.notifyPiConnected;
 
+            $.connection.hub.logging = true;
             $.connection.hub.start().done(function () {
                 viewModel.init();
             });
