@@ -29,7 +29,7 @@ namespace RPi.NancyHost
             var options = GetStartOptions();
             PiController.Instance.PwmController = GetPwmController();
 
-            Log.InfoFormat("rpi.nancy starting at {0}...", options.Urls[0]);
+            Log.InfoFormat("rpi.nancy starting {0} at {1}...", options.ServerFactory, options.Urls[0]);
 
             using (WebApp.Start<Startup>(options))
             {

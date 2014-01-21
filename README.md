@@ -36,14 +36,15 @@ SignalR hub is hosted on IIS 8 with two hubs: one hub for a web browser remote c
 This works well, apart from the requirement of IIS 8 as the mediator
 see: 
 
-    Rpi.Console.exe -m=SignalRTest
+    rpi.console/rpiconsole.exe -m=SignalRTest
 
 2) Console app with an OWIN hosted webserver, using Nancy, SignalR and NoWin.
 SignalR on mono cannot host websockets and the transport falls back to Server Side Events.
 Response is very slow while dragging a slider backward and foward with several seconds lag before the server sees this response. see RPi.Nancy.
 Response is even slower using Katana as the web server.
 see:
-    rpi-nancy.exe
+
+    rpi.nancy/rpi-nancy.exe
 
 
 * WinForms on mono 3.x is broken at the time of writing.  
