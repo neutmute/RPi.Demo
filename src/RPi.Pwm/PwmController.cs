@@ -7,8 +7,10 @@ using Common.Logging;
 using Raspberry.IO.Components.Controllers.Pca9685;
 using Raspberry.IO.GeneralPurpose;
 using Raspberry.IO.InterIntegratedCircuit;
+using RPi.Comms;
 using RPi.Pwm.Motors;
 using RPi.Pwm.Optics;
+using PwmChannel = Raspberry.IO.Components.Controllers.Pca9685.PwmChannel;
 
 namespace RPi.Pwm
 {
@@ -52,5 +54,31 @@ namespace RPi.Pwm
             DcMotor.Stop();
         }
 
+        public void Command(PwmCommand pwmCommand)
+        {
+            Log.DebugFormat("PwmCommand received({0})!", pwmCommand);
+            switch (pwmCommand.Channel)
+            {
+                case DeviceChannel.DcMotor:
+                    var percent = pwmCommand.DutyCyclePercent;
+                    var direction = percent > 0 ? MotorDirection.Forward : MotorDirection.Reverse;
+                    DcMotor.Go(Math.Abs(percent), direction);
+                    break;
+                case DeviceChannel.Led:
+                    Led0.On(pwmCommand.DutyCyclePercent);
+                    break;
+                case DeviceChannel.Servo:
+                    Servo.MoveTo(pwmCommand.DutyCyclePercent);
+                    break;
+            }
+        }
+
+
+        public void Command(StepperCommand command)
+        {
+            Log.DebugFormat("StepperCommand received({0})!", command);
+            Stepper.StepDelayMs = command.DelayMs;
+            Stepper.Rotate(command.Steps);
+        }
     }
 }

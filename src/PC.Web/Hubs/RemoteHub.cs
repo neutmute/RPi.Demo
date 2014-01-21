@@ -27,20 +27,18 @@ namespace PC.Web.Hubs
             Log.Info("Remote sent a ping");
         }
 
-        public void SetPwm(PwmChannel channel, int value)
+        public void SetPwm(DeviceChannel channel, int value)
         {
-            Log.Info("SetPwm({0},{1})", channel, value);
-            var piCommand = new RpiCommand();
-            piCommand.PwmCommands.Add(new PwmCommand(channel, value));
+            Log.Debug("SetPwm({0},{1})", channel, value);
+            var piCommand = new PwmCommand(channel, value);
             PiController.Instance.SendCommand(piCommand);
         }
 
         public void RunStepper(int steps, int delayMs)
         {
-            Log.Info("RunStepper({0},{1})", steps, delayMs);
+            Log.Debug("RunStepper({0},{1})", steps, delayMs);
             var stepperCommand = new StepperCommand(steps, delayMs);
-            var piCommand = new RpiCommand {Stepper = stepperCommand};
-            PiController.Instance.SendCommand(piCommand);
+            PiController.Instance.SendStepCommand(stepperCommand);
         }
     }
 }

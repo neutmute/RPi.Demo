@@ -3,7 +3,7 @@ using System.Text;
 
 namespace RPi.Comms
 {
-    public enum PwmChannel
+    public enum DeviceChannel
     {
         Unknown,
         Led,
@@ -31,11 +31,11 @@ namespace RPi.Comms
 
     public struct PwmCommand
     {
-        public PwmChannel Channel;
+        public DeviceChannel Channel;
 
         public int DutyCyclePercent;
 
-        public PwmCommand(PwmChannel channel, int dutyCyclePercent)
+        public PwmCommand(DeviceChannel channel, int dutyCyclePercent)
         {
             Channel = channel;
             DutyCyclePercent = dutyCyclePercent;
@@ -44,32 +44,6 @@ namespace RPi.Comms
         public override string ToString()
         {
             return string.Format("{0}={1}%", Channel, DutyCyclePercent);
-        }
-    }
-
-    public class RpiCommand
-    {
-        public List<PwmCommand> PwmCommands { get; set; }
-
-        public StepperCommand? Stepper { get; set; }
-
-        public RpiCommand()
-        {
-            PwmCommands = new List<PwmCommand>();
-        }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-
-            PwmCommands.ForEach(pwmC => sb.AppendFormat("{0}; ", pwmC));
-
-            if (Stepper.HasValue)
-            {
-                sb.AppendFormat("Stepper={0};", Stepper);
-            }
-
-            return sb.ToString();
         }
     }
 }

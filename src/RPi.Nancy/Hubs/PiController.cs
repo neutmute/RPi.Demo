@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Logging;
 using RPi.Comms;
+using RPi.Pwm;
+using RPi.Pwm.Motors;
 
 namespace RPi.NancyHost.Hubs
 {
-    class PiController
+    public sealed class PiController
     {
-        private ILog Log;
-        private readonly static Lazy<PiController> _instance = new Lazy<PiController>(() => new PiController());
+        #region Singleton
 
         private PiController()
         {
@@ -20,14 +21,37 @@ namespace RPi.NancyHost.Hubs
 
         public static PiController Instance
         {
-            get
-            {
-                return _instance.Value;
-            }
+            get { return Nested.instance; }
         }
-        public void SendCommand(RpiCommand command)
+
+        private class Nested
         {
-            Log.InfoFormat("Command received: {0}", command);
+            // Explicit static constructor to tell C# compiler
+            // not to mark type as beforefieldinit
+            static Nested()
+            {
+            }
+
+            internal static readonly PiController instance = new PiController();
+        }
+
+        #endregion
+
+
+
+        private ILog Log;
+
+        public PwmController PwmController { get; set; }
+        
+        public void SendCommand(PwmCommand pwmCommand)
+        {
+            PwmController.Command(pwmCommand);
+        }
+
+
+        public void SendStepCommand(StepperCommand stepperCommand)
+        {
+            PwmController.Command(stepperCommand);
         }
     }
 }

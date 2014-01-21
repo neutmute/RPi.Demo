@@ -33,9 +33,13 @@ namespace PC.Web
             set;
         }
 
-        public void SendCommand(RpiCommand command)
+        public void SendCommand(PwmCommand command)
         {
-            Clients.All.SendCommand(command);
+            Clients.All.SendPwmCommand(command);
+        }
+        public void SendStepCommand(StepperCommand stepperCommand)
+        {
+            Clients.All.SendSteppercommand(stepperCommand);
         }
     }
 }

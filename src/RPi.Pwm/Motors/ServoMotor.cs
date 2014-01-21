@@ -28,7 +28,7 @@ namespace RPi.Pwm.Motors
 
             var gap = MaximumPosition -  MinimumPosition;
             var pulseValue = MinimumPosition + (gap*percent/100);
-            Log.Info(m=>m("Servo.{0} => {1}% (pulse={2})", Channel, percent, pulseValue));
+            Log.Debug(m=>m("Servo.{0} => {1}% (pulse={2})", Channel, percent, pulseValue));
             Controller.SetPwm(Channel, 0, pulseValue);
         }
     }

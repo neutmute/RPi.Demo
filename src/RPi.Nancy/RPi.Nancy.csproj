@@ -93,9 +93,6 @@
     <Compile Include="..\PC.Web\Hubs\RemoteHub.cs">
       <Link>Hubs\RemoteHub.cs</Link>
     </Compile>
-    <Compile Include="..\PC.Web\Hubs\RemoteHubController.cs">
-      <Link>Hubs\RemoteHubController.cs</Link>
-    </Compile>
     <Compile Include="Hubs\PiController.cs" />
     <Compile Include="NancyBoostrapper.cs" />
     <Compile Include="PiRemoteModule.cs" />
@@ -181,6 +178,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\raspberry-sharp-io\Raspberry.IO.Components\Raspberry.IO.Components.csproj">
+      <Project>{8388cfca-e3db-43f7-b049-2cb195211ce8}</Project>
+      <Name>Raspberry.IO.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\raspberry-sharp-io\Raspberry.IO.GeneralPurpose\Raspberry.IO.GeneralPurpose.csproj">
+      <Project>{281c71ed-c36d-408e-8baa-75c381dc17e7}</Project>
+      <Name>Raspberry.IO.GeneralPurpose</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RPi.Comms\RPi.Comms.csproj">
       <Project>{aeecae23-d46e-4f64-91b3-c0b50bc2483e}</Project>
       <Name>RPi.Comms</Name>

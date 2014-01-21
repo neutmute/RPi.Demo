@@ -68,35 +68,7 @@ namespace RPi.ConsoleApp.Comms
 
             Log.Info("Kill received!");
         }
-
-        public void CommandReceived(RpiCommand command)
-        {
-            Log.InfoFormat("CommandReceived({0})!", command);
-            foreach(PwmCommand pwmCommand in command.PwmCommands)
-            {
-                switch (pwmCommand.Channel)
-                {
-                    case PwmChannel.DcMotor:
-                        var percent = pwmCommand.DutyCyclePercent;
-                        var direction = percent > 0 ? MotorDirection.Forward:MotorDirection.Reverse;
-                        _pwmController.DcMotor.Go(Math.Abs(percent), direction);
-                        break;
-                    case PwmChannel.Led:
-                        _pwmController.Led0.On(pwmCommand.DutyCyclePercent);
-                        break;
-                    case PwmChannel.Servo:
-                        _pwmController.Servo.MoveTo(pwmCommand.DutyCyclePercent);
-                        break;
-                }
-            }
-
-            if (command.Stepper.HasValue)
-            {
-                _pwmController.Stepper.StepDelayMs = command.Stepper.Value.DelayMs;
-                _pwmController.Stepper.Rotate(command.Stepper.Value.Steps);
-            }
-
-        }
+        
 
         public async Task Start()
         {
@@ -109,7 +81,8 @@ namespace RPi.ConsoleApp.Comms
             _hubConnection.TraceWriter = Console.Out;
 
             _piHubProxy = _hubConnection.CreateHubProxy("PiHub");
-            _piHubProxy.On<RpiCommand>("SendCommand", CommandReceived);
+            _piHubProxy.On<PwmCommand>("SendPwmCommand", _pwmController.Command);
+            _piHubProxy.On<StepperCommand>("SendStepperCommand", _pwmController.Command);
 
             _hubConnection.StateChanged += _hubConnection_StateChanged;
             _hubConnection.Start();

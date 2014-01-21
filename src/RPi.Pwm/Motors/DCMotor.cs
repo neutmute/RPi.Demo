@@ -38,19 +38,19 @@ namespace RPi.Pwm.Motors
 
             if (powerPercent == 100)
             {
-                Log.Info(m=>m("DC.{0}={2}.{1} (FULL)", channelA, powerPercent, direction));
+                Log.Debug(m => m("DC.{0}={2}.{1} (FULL)", channelA, powerPercent, direction));
                 Controller.SetFull(channelA, true);
                 Controller.SetFull(channelB, false);
             }
             else if (powerPercent == 0)
             {
-                Log.Info(m=>m("DC.{0}={2}.{1} (FULL OFF)", channelA, powerPercent, direction));
+                Log.Debug(m=>m("DC.{0}={2}.{1} (FULL OFF)", channelA, powerPercent, direction));
                 Controller.SetFull(channelA, false);
                 Controller.SetFull(channelB, false);
             }
             else
             {
-                Log.Info(m=>m("DC.{0}={3}.{1} (pwm={2})", channelA, powerPercent, speedInPwm, direction));
+                Log.Debug(m => m("DC.{0}={3}.{1} (pwm={2})", channelA, powerPercent, speedInPwm, direction));
                 Controller.SetPwm(channelA, 0, speedInPwm);
                 Controller.SetFull(channelB, false);
             }
@@ -58,7 +58,7 @@ namespace RPi.Pwm.Motors
 
         public void Stop()
         {
-            Log.Info(m=>m("DC.{0}=FULL OFF", _controlChannel0));
+            Log.Debug(m => m("DC.{0}=FULL OFF", _controlChannel0));
             Controller.SetFull(_controlChannel0, false);
             Controller.SetFull(_controlChannel1, false);
         }

@@ -8,6 +8,8 @@ using Nancy.Hosting.Self;
 using Common.Logging;
 using Owin;
 using Nancy;
+using RPi.NancyHost.Hubs;
+using RPi.Pwm;
 
 namespace RPi.NancyHost
 {
@@ -24,18 +26,10 @@ namespace RPi.NancyHost
         {
             Log = LogManager.GetCurrentClassLogger();
 
-            var options = new StartOptions
-            {
-                //ServerFactory = "Microsoft.Owin.Host.HttpListener"
-                ServerFactory = "Nowin"
-            };
+            var options = GetStartOptions();
+            PiController.Instance.PwmController = GetPwmController();
 
-            //var url = "http://*:8080"; // windows
-            var url = "http://192.168.1.64:8080"; // pi/mono
-
-            options.Urls.Add(url);
-
-            Log.InfoFormat("rpi.nancy starting on {0}...", url);
+            Log.InfoFormat("rpi.nancy starting at {0}...", options.Urls[0]);
 
             using (WebApp.Start<Startup>(options))
             {
@@ -46,6 +40,37 @@ namespace RPi.NancyHost
                 Console.ReadKey();
                 Log.Info("server stopping...");
             }
+        }
+
+        private static PwmController GetPwmController()
+        {
+            var deviceFactory = new Pca9685DeviceFactory();
+            var device = deviceFactory.GetDevice();
+            var motorController = new PwmController(device);
+            motorController.Init();
+            return motorController;
+        }
+
+        private static StartOptions GetStartOptions()
+        {
+            var options = new StartOptions
+            {
+                //ServerFactory = "Microsoft.Owin.Host.HttpListener"
+                ServerFactory = "Nowin"
+            };
+
+            string url;
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                url = "http://192.168.1.64:8080"; // pi/mono doesn't like the wildcard ip
+            }
+            else
+            {
+                url = "http://*:8080";
+            }
+
+            options.Urls.Add(url);
+            return options;
         }
     }
 

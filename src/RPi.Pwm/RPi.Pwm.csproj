@@ -66,6 +66,10 @@
       <Project>{326342e5-0411-40e8-9f2d-563d6b192568}</Project>
       <Name>Raspberry.IO.SerialPeripheralInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RPi.Comms\RPi.Comms.csproj">
+      <Project>{aeecae23-d46e-4f64-91b3-c0b50bc2483e}</Project>
+      <Name>RPi.Comms</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -65,7 +65,7 @@ namespace RPi.Pwm.Motors
                     Controller.SetFull(_channels[controllerIndex], IsEnergised(sequenceCode, controllerIndex));
                 }
 
-                Log.Info(m=>m("Step {3}/{4}-{0}: {1}. sleep={2}", _currentStep, sequenceCode, StepDelayMs, i, steps));
+                Log.Debug(m=>m("Step {3}/{4}-{0}: {1}. sleep={2}", _currentStep, sequenceCode, StepDelayMs, i, steps));
                 Thread.Sleep(StepDelayMs);    
             }
 
