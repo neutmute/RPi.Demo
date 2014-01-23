@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Owin.Hosting;
-using Nancy.Hosting.Self;
 using Common.Logging;
 using Owin;
-using Nancy;
 using RPi.NancyHost.Hubs;
 using RPi.Pwm;
 
