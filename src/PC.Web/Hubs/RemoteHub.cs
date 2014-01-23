@@ -30,7 +30,7 @@ namespace PC.Web.Hubs
         }
 
         /// <summary>
-        /// Try to reduce data conversions
+        /// Try to reduce data conversions to see if it helps perf. didn't really.
         /// </summary>
         public void SetServo(int value)
         {
