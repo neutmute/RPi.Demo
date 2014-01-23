@@ -54,6 +54,11 @@ namespace RPi.Pwm
             DcMotor.Stop();
         }
 
+        public void Command(int channel, int percent)
+        {
+            Servo.MoveTo(percent);
+        }
+
         public void Command(PwmCommand pwmCommand)
         {
             Log.DebugFormat("PwmCommand received({0})!", pwmCommand);

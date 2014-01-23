@@ -37,8 +37,6 @@ namespace RPi.NancyHost.Hubs
 
         #endregion
 
-
-
         private ILog Log;
 
         public PwmController PwmController { get; set; }
@@ -48,6 +46,10 @@ namespace RPi.NancyHost.Hubs
             PwmController.Command(pwmCommand);
         }
 
+        public void Command(int channel, int dutyCyclePercent)
+        {
+            PwmController.Command(channel, dutyCyclePercent);
+        }
 
         public void SendStepCommand(StepperCommand stepperCommand)
         {

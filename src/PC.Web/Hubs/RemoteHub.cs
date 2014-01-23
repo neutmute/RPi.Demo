@@ -10,7 +10,9 @@ using RPi.NancyHost.Hubs;
 namespace PC.Web.Hubs
 {
    
-
+    /// <summary>
+    /// Methods the browser can call
+    /// </summary>
     public class RemoteHub : Hub
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
@@ -25,6 +27,14 @@ namespace PC.Web.Hubs
         public void Ping()
         {
             Log.Info("Remote sent a ping");
+        }
+
+        /// <summary>
+        /// Try to reduce data conversions
+        /// </summary>
+        public void SetServo(int value)
+        {
+            PiController.Instance.Command(2, value);
         }
 
         public void SetPwm(DeviceChannel channel, int value)

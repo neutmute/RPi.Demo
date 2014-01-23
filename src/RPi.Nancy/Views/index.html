@@ -95,7 +95,7 @@
 
         this.sendServo = function () {
             if (connected) {
-                self.remoteHubProxy.server.setPwm("Servo", self.pwmServo())
+                self.remoteHubProxy.server.setServo(self.pwmServo())
                     .fail(self.handleError);
             }
         };

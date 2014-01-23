@@ -37,6 +37,12 @@ namespace PC.Web
         {
             Clients.All.SendPwmCommand(command);
         }
+
+        public void Command(int channel, int percent)
+        {
+            throw new NotSupportedException();
+        }
+
         public void SendStepCommand(StepperCommand stepperCommand)
         {
             Clients.All.SendSteppercommand(stepperCommand);
