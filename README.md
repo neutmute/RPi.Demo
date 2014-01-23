@@ -35,8 +35,9 @@ ie:
 </pre>
 
 ## SignalR ##
-The original code at one point targeted Mono 2.x with a WinForms UI to allow interactive control of the motors (WinForms running in X-Windows).
-WinForms on mono 3.x is broken at the time of writing which this solution now targets, enabling the use of async/await.
+The code intially targeted Mono 2.x with a WinForms UI to allow interactive control of the motors (WinForms running in X-Windows).
+It now targets mono 3.x which was compiled on the pi so as to take advantage of hard float and enable the use of async/await.
+WinForms on mono 3.x is broken at the time of writing so a web based UI was required.
 
 SignalR is demonstrated in two ways
 
