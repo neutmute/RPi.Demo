@@ -24,27 +24,38 @@ A lego ping pong launcher was constructed to showcase the motors in action.
 
 
 
-The solution expects the raspberry-sharp-io repo to be checked out into a sibling directory.
+## Requirements ##
+This solution expects [my fork](https://github.com/neutmute/raspberry-sharp-io) of the raspberry-sharp-io solution to be cloned into a sibling directory.
+
+ie:
+<pre>
++
++--RPi.Demo
++--raspberry-sharp-io
+</pre>
 
 ## SignalR ##
 The original code at one point targeted Mono 2.x with a WinForms UI to allow interactive control of the motors (WinForms running in X-Windows).
+WinForms on mono 3.x is broken at the time of writing which this solution now targets, enabling the use of async/await.
 
-The current solution targets mono 3, uses async/await and has several SignalR configurations:
+SignalR is demonstrated in two ways
 
-1) Client-Server-Client topology.
+1) **Client-Server-Client topology (eg: pi-IIS-iPhone)**
+
 SignalR hub is hosted on IIS 8 with two hubs: one hub for a web browser remote control client using jQuery mobile; a second hub for the pi itself to connect to via the signalR c# client.
-This works well, apart from the requirement of IIS 8 as the mediator
+This works well, apart from the requirement of IIS 8 as the mediator.
 see: 
 
     rpi.console/rpiconsole.exe -m=SignalRTest
 
-2) Console app with an OWIN hosted webserver, using Nancy, SignalR and NoWin.
+2) **Self contained/hosted console app, using Nancy, SignalR and [NoWin](https://github.com/Bobris/Nowin).**
+
 SignalR on mono cannot host websockets and the transport falls back to Server Side Events.
-Response is very slow while dragging a slider backward and foward with several seconds lag before the server sees this response. see RPi.Nancy.
-Response is even slower using Katana as the web server.
+Response is very slow while dragging a slider backward and foward with several seconds lag before the server sees this response. 
+Response is even slower using [Katana](http://katanaproject.codeplex.com/) as the web server.
 see:
 
     rpi.nancy/rpi-nancy.exe
 
 
-* WinForms on mono 3.x is broken at the time of writing.  
+  
