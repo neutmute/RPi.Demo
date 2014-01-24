@@ -24,15 +24,19 @@ namespace RPi.NancyHost
         {
             Log = LogManager.GetCurrentClassLogger();
 
-            var options = GetStartOptions();
-            PiController.Instance.PwmController = GetPwmController();
+            var cliOptions = new ConsoleOptions(Environment.GetCommandLineArgs());
 
-            Log.InfoFormat("rpi.nancy starting {0} at {1}...", options.ServerFactory, options.Urls[0]);
+            var serverStartOptions = GetServerStartOptions();
+            PiController.Instance.PwmController = GetPwmController(cliOptions);
 
-            using (WebApp.Start<Startup>(options))
+            Log.InfoFormat(
+                "rpi.nancy starting {0} at {1} with {2}"
+                , serverStartOptions.ServerFactory
+                , serverStartOptions.Urls[0], cliOptions);
+
+            using (WebApp.Start<Startup>(serverStartOptions))
             {
                 Log.Info("...server started and listening");
-
 
                 Console.Write("Press any key to halt server");
                 Console.ReadKey();
@@ -40,16 +44,16 @@ namespace RPi.NancyHost
             }
         }
 
-        private static PwmController GetPwmController()
+        private static PwmController GetPwmController(ConsoleOptions options)
         {
             var deviceFactory = new Pca9685DeviceFactory();
-            var device = deviceFactory.GetDevice();
+            var device = deviceFactory.GetDevice(options.UseFakeDevice);
             var motorController = new PwmController(device);
             motorController.Init();
             return motorController;
         }
 
-        private static StartOptions GetStartOptions()
+        private static StartOptions GetServerStartOptions()
         {
             var options = new StartOptions
             {

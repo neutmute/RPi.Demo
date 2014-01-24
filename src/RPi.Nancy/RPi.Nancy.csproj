@@ -70,6 +70,9 @@
     <Reference Include="Nancy.Owin">
       <HintPath>..\..\packages\Nancy.Owin.0.21.1\lib\net40\Nancy.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="NDesk.Options">
+      <HintPath>..\..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -94,6 +97,7 @@
     <Compile Include="..\PC.Web\Hubs\RemoteHub.cs">
       <Link>Hubs\RemoteHub.cs</Link>
     </Compile>
+    <Compile Include="ConsoleOptions.cs" />
     <Compile Include="Hubs\PiController.cs" />
     <Compile Include="NancyBoostrapper.cs" />
     <Compile Include="PiRemoteModule.cs" />
