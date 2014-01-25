@@ -5,7 +5,6 @@
     <div data-role="header">
         <h1>Pi Server</h1>
     </div>
-
     <div data-role="collapsible-set" data-content-theme="d" id="set">
         <div data-role="collapsible" id="set1" data-collapsed="false">
             <h3>LED</h3>
@@ -26,9 +25,8 @@
             <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range" data-bind="value: pwmDcMotor">
         </div>
     </div>
-
-
-    <div data-role="collapsible-set" data-content-theme="d" id="set">
+    
+    <div data-role=" collapsible-set" data-content-theme="d" id="set">
         <div data-role="collapsible" id="set1" data-collapsed="false">
             <h3>Stepper</h3>
             <label for="sliderStepperSteps">Steps</label>
@@ -39,7 +37,7 @@
 
             <input type="button" value="Step" data-bind="click:runStepper">
         </div>
-    </div>
+</div>
 </div>
 @EndSection
 
@@ -51,10 +49,12 @@
         var self = this;
         this.remoteHubProxy = $.connection.remoteHub;
         var connected = false;
+        this.throttleRateLimitMs = 500;
 
         this.pwmLed = ko.observable();
         this.pwmDcMotor = ko.observable();
         this.pwmServo = ko.observable();
+        
         this.stepSteps = ko.observable();
         this.stepDelayMs = ko.observable();
 
@@ -99,7 +99,11 @@
                     .fail(self.handleError);
             }
         };
-
+        
+        this.throttledSendDcMotor = _.throttle(self.sendDcMotor, self.throttleRateLimitMs);
+        this.throttledSendLed = _.throttle(self.sendLed, self.throttleRateLimitMs);
+        this.throttledSendServo = _.throttle(self.sendServo, self.throttleRateLimitMs);
+        
         this.runStepper = function () {
             if (connected) {
                 self.remoteHubProxy.server.runStepper(self.stepSteps(), self.stepDelayMs())
@@ -107,9 +111,9 @@
             }
         }
 
-        this.pwmLed.subscribe(self.sendLed);
-        this.pwmDcMotor.subscribe(self.sendDcMotor);
-        this.pwmServo.subscribe(self.sendServo);
+        this.pwmLed.subscribe(self.throttledSendLed);
+        this.pwmDcMotor.subscribe(self.throttledSendDcMotor);
+        this.pwmServo.subscribe(self.throttledSendServo);
     }
 
 
