@@ -12,6 +12,7 @@ namespace RPi.NancyHost
         public PiRemoteModule()
         {
             Get["/"] = parameters => View["index.html"];
+            Get["/launcher/"] = parameters => View["launcher.html"];
         }
     }
 }

@@ -7,15 +7,24 @@
     <link href="/Content/jquery.mobile-1.3.2.min.css" rel="stylesheet" />
     <link href="/Content/jquery.mobile.theme-1.3.2.min.css" rel="stylesheet" />
 </head>
-<body>
-    @Section['Content'];
+    <body>
+        <div role="main" class="ui-content">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="/" data-ajax="false">Simple</a></li>
+                    <li><a href="/launcher" data-ajax="false">Launcher</a></li>
+                </ul>
+            </div><!-- /navbar -->
 
-    <script src="/Scripts/jquery-1.9.1.js"></script>
-    <script src="/Scripts/jquery.mobile-1.3.2.js"></script>
-    <script src="/Scripts/jquery.signalR-2.0.1.js"></script>
-    <script src="/Scripts/knockout-3.0.0.debug.js"></script>
-    <script src="/Scripts/underscore.js"></script>
-    <script src="/signalr/hubs"></script>   
-    @Section['Scripts'];
+            @Section['Content'];
+
+        </div>
+        <script src="/Scripts/jquery-1.9.1.js"></script>
+        <script src="/Scripts/jquery.mobile-1.3.2.js"></script>
+        <script src="/Scripts/jquery.signalR-2.0.1.js"></script>
+        <script src="/Scripts/knockout-3.0.0.debug.js"></script>
+        <script src="/Scripts/underscore.js"></script>
+        <script src="/signalr/hubs"></script>
+        @Section['Scripts'];
 </body>
 </html>
