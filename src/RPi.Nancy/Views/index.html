@@ -1,42 +1,40 @@
 ﻿@Master['master.html']
 @Section['Content']
 
-<div role="main" class="ui-content">
-
-    <div data-role="collapsible-set" data-content-theme="d" id="set">
-        <div data-role="collapsible" id="set1" data-collapsed="false">
-            <h3>LED</h3>
-            <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range" data-bind="value: pwmLed">
-        </div>
+<div data-role="collapsible-set" data-content-theme="d" id="set">
+    <div data-role="collapsible" id="set1" data-collapsed="false">
+        <h3>LED</h3>
+        <input name="sliderLed" id="sliderLed" min="0" max="100" value="50" type="range" data-bind="value: pwmLed">
     </div>
-
-    <div data-role="collapsible-set" data-content-theme="d" id="set">
-        <div data-role="collapsible" id="set1" data-collapsed="false">
-            <h3>Servo</h3>
-            <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range" data-bind="value: pwmServo">
-        </div>
-    </div>
-
-    <div data-role="collapsible-set" data-content-theme="d" id="set">
-        <div data-role="collapsible" id="set1" data-collapsed="false">
-            <h3>DC Motor</h3>
-            <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range" data-bind="value: pwmDcMotor">
-        </div>
-    </div>
-    
-    <div data-role=" collapsible-set" data-content-theme="d" id="set">
-        <div data-role="collapsible" id="set1" data-collapsed="false">
-            <h3>Stepper</h3>
-            <label for="sliderStepperSteps">Steps</label>
-            <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="1000" value="50" type="range" data-bind="value: stepSteps">
-
-            <label for="sliderStepperDelay">Delay (ms)</label>
-            <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="6" type="range" data-bind="value: stepDelayMs">
-
-            <input type="button" value="Step" data-bind="click:runStepper">
-        </div>
 </div>
+
+<div data-role="collapsible-set" data-content-theme="d" id="set">
+    <div data-role="collapsible" id="set1" data-collapsed="false">
+        <h3>Servo</h3>
+        <input name="sliderServo" id="sliderServo" min="0" max="100" value="50" type="range" data-bind="value: pwmServo">
+    </div>
 </div>
+
+<div data-role="collapsible-set" data-content-theme="d" id="set">
+    <div data-role="collapsible" id="set1" data-collapsed="false">
+        <h3>DC Motor</h3>
+        <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range" data-bind="value: pwmDcMotor">
+    </div>
+</div>
+
+<div data-role=" collapsible-set" data-content-theme="d" id="set">
+    <div data-role="collapsible" id="set1" data-collapsed="false">
+        <h3>Stepper</h3>
+        <label for="sliderStepperSteps">Steps</label>
+        <input name="sliderStepperSteps" id="sliderStepperSteps" min="0" max="1000" value="50" type="range" data-bind="value: stepSteps">
+
+        <label for="sliderStepperDelay">Delay (ms)</label>
+        <input name="sliderStepperDelay" id="sliderStepperDelay" min="0" max="100" value="6" type="range" data-bind="value: stepDelayMs">
+
+        <input type="button" value="Step" data-bind="click:runStepper">
+    </div>
+</div>
+
 @EndSection
 
 @Section['Scripts']
@@ -72,11 +70,7 @@
         this.handleError = function (error) {
             console.warn(error);
         }
-
-        this.notifyPiConnected = function () {
-            console.log("A Pi has connected");
-        }
-
+        
         this.sendLed = function () {
             if (connected) {
                 self.remoteHubProxy.server.setPwm("Led", self.pwmLed())
@@ -124,7 +118,6 @@
 
         remoteHubProxy.client.notifyPiConnected = viewModel.notifyPiConnected;
         $.connection.hub.logging = true;
-        //{ transport: 'longPolling' }
         $.connection.hub.start({ transport: 'serverSentEvents' }).done(function () {
             viewModel.init();
         });

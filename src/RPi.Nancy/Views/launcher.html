@@ -1,11 +1,84 @@
 ﻿@Master['master.html']
 @Section['Content']
 
-   foo
-@EndSection
 
-@Section['Scripts']
+<div data-role="collapsible-set" data-content-theme="d" id="set">
+    <div data-role="collapsible" id="set1" data-collapsed="false">
+        <h3>Ready</h3>
+        <input name="sliderDcMotor" id="sliderDcMotor" min="-100" max="100" value="0" type="range" data-bind="value: pwmDcMotor">
+    </div>
+</div>
+
+<div data-role="collapsible-set" data-content-theme="d" id="set">
+    <div data-role="collapsible" id="set1" data-collapsed="false">
+        <h3>Aim</h3>
+        <div data-role="controlgroup" data-type="horizontal">
+            <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left"  >Left</a>
+            <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" >Right</a>
+        </div>
+    </div>
+</div>
+
+<div class="ui-grid-a">
+    <a href="#" data-role="button" data-inline="true" data-theme="e">Fire!</a>
+</div>
+    @EndSection
+
+    @Section['Scripts']
 <script>
-    
+
+
+    function piRemoteViewModel() {
+        var self = this;
+        this.remoteHubProxy = $.connection.remoteHub;
+        var connected = false;
+        this.throttleRateLimitMs = 500;
+
+        this.pwmLed = ko.observable();
+
+        this.init = function () {
+
+            this.remoteHubProxy.server.ping()
+                .done(this.handlePingResult)
+                .fail(this.handleError);
+
+            connected = true;
+        }
+
+        this.handlePingResult = function () {
+            console.log("ping'd server ok");
+        }
+
+        this.handleError = function (error) {
+            console.warn(error);
+        }
+        
+        this.sendDcMotor = function () {
+            if (connected) {
+                self.remoteHubProxy.server.setPwm("DcMotor", self.pwmDcMotor())
+                    .fail(self.handleError);
+            }
+        };
+
+        this.throttledSendDcMotor = _.throttle(self.sendDcMotor, self.throttleRateLimitMs);
+
+
+        this.pwmDcMotor.subscribe(self.throttledSendDcMotor);
+    }
+
+
+    $(document).ready(function () {
+
+        var remoteHubProxy = $.connection.remoteHub;
+
+        var viewModel = new piRemoteViewModel();
+        ko.applyBindings(viewModel);
+
+        remoteHubProxy.client.notifyPiConnected = viewModel.notifyPiConnected;
+        $.connection.hub.logging = true;
+        $.connection.hub.start({ transport: 'serverSentEvents' }).done(function () {
+            viewModel.init();
+        });
+    });
 </script>
-@EndSection
+    @EndSection
