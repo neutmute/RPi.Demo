@@ -55,5 +55,21 @@ namespace RPi.NancyHost.Hubs
         {
             PwmController.Command(stepperCommand);
         }
+
+        public void ActivateLaunchClaw()
+        {
+            /*
+             * 
+            _motorController.Servo.MoveTo(70);
+            Thread.Sleep(750);
+            _motorController.Servo.MoveTo(10);
+             */
+            var ingestCommand = new PwmCommand {Channel = DeviceChannel.Servo, DutyCyclePercent = 10};
+            PwmController.Command(ingestCommand);
+
+            var throwCommand = new PwmCommand { Channel = DeviceChannel.Servo, DutyCyclePercent = 70 };
+            PwmController.Command(throwCommand);
+            
+        }
     }
 }

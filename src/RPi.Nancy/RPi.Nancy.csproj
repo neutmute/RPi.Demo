@@ -98,6 +98,7 @@
       <Link>Hubs\RemoteHub.cs</Link>
     </Compile>
     <Compile Include="ConsoleOptions.cs" />
+    <Compile Include="Hubs\LauncherHub.cs" />
     <Compile Include="Hubs\PiController.cs" />
     <Compile Include="NancyBoostrapper.cs" />
     <Compile Include="PiRemoteModule.cs" />

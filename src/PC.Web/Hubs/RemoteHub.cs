@@ -9,14 +9,11 @@ using RPi.NancyHost.Hubs;
 
 namespace PC.Web.Hubs
 {
-   
-    /// <summary>
-    /// Methods the browser can call
-    /// </summary>
-    public class RemoteHub : Hub
+    public class RemoteHubBase : Hub
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-        
+        private static readonly Logger _Log = LogManager.GetCurrentClassLogger();
+
+        protected Logger Log { get { return _Log; } }
 
         public override Task OnConnected()
         {
@@ -28,7 +25,13 @@ namespace PC.Web.Hubs
         {
             Log.Info("Remote sent a ping");
         }
+    }
 
+    /// <summary>
+    /// Methods the browser can call
+    /// </summary>
+    public class RemoteHub : RemoteHubBase
+    {
         /// <summary>
         /// Try to reduce data conversions to see if it helps perf. didn't really.
         /// </summary>
