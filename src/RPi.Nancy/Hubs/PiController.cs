@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Logging;
+using Nancy.Helpers;
 using RPi.Comms;
 using RPi.Pwm;
 using RPi.Pwm.Motors;
@@ -37,10 +38,22 @@ namespace RPi.NancyHost.Hubs
 
         #endregion
 
-        private ILog Log;
+        #region Fields
+
+        private readonly ILog Log;
+        private Task _clawTask;
+        #endregion
+
+
+        #region Ctor
 
         public PwmController PwmController { get; set; }
-        
+
+        #endregion
+
+
+        #region Methods
+
         public void SendCommand(PwmCommand pwmCommand)
         {
             PwmController.Command(pwmCommand);
@@ -58,19 +71,44 @@ namespace RPi.NancyHost.Hubs
 
         public void ActivateLaunchClaw()
         {
-            Log.Info("Claw!");
-            /*
-             * 
-            _motorController.Servo.MoveTo(70);
-            Thread.Sleep(750);
-            _motorController.Servo.MoveTo(10);
-             */
-            var ingestCommand = new PwmCommand {Channel = DeviceChannel.Servo, DutyCyclePercent = 10};
-            PwmController.Command(ingestCommand);
-
-            var throwCommand = new PwmCommand { Channel = DeviceChannel.Servo, DutyCyclePercent = 70 };
-            PwmController.Command(throwCommand);
-            
+            if (_clawTask!= null && !_clawTask.IsCompleted)
+            {
+                Log.Info("Claw still running");
+                return;
+            }
+            _clawTask = GetClawTask();
+            _clawTask.Start();
         }
+
+        private Task GetClawTask()
+        {
+            var task = new Task(() =>
+            {
+                Log.Info("Claw!");
+
+                var ingestCommand = new PwmCommand {Channel = DeviceChannel.Servo, DutyCyclePercent = 10};
+                PwmController.Command(ingestCommand);
+
+                Task.Delay(TimeSpan.FromMilliseconds(750)).Wait();
+
+                var throwCommand = new PwmCommand {Channel = DeviceChannel.Servo, DutyCyclePercent = 70};
+                PwmController.Command(throwCommand);
+            });
+
+            task.WhenCompleted(ClawCompleted, ClawCompleted);
+
+            return task;
+        }
+
+        private void ClawCompleted(Task task)
+        {
+            if (task.IsFaulted)
+            {
+                Log.Error(task.Exception);
+            }
+        }
+
+        #endregion
+
     }
 }
