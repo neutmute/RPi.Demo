@@ -81,7 +81,7 @@ namespace RPi.Pwm
 
         public void Command(StepperCommand command)
         {
-            Log.DebugFormat("StepperCommand received({0})!", command);
+            Log.InfoFormat("StepperCommand received({0})!", command);
             Stepper.StepDelayMs = command.DelayMs;
             Stepper.Rotate(command.Steps);
         }
