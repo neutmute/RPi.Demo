@@ -27,6 +27,9 @@ namespace RPi.Pwm
 
         private readonly IPwmDevice _pwmDevice;
 
+        public event EventHandler OnStepperCompleted;
+
+
         public PwmController(IPwmDevice pwmDevice)
         {
             _pwmDevice = pwmDevice;
@@ -43,6 +46,8 @@ namespace RPi.Pwm
                 , PwmChannel.C10
                 , PwmChannel.C9
                 , PwmChannel.C8);
+
+            Stepper.RotationCompleted += OnStepperCompleted;
 
             Led0 = new Led(_pwmDevice, PwmChannel.C0);
         }
@@ -85,5 +90,7 @@ namespace RPi.Pwm
             Stepper.StepDelayMs = command.DelayMs;
             Stepper.Rotate(command.Steps);
         }
+
+
     }
 }

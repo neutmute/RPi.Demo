@@ -25,6 +25,8 @@ namespace RPi.Pwm.Motors
 
         public int StepDelayMs { get; set; }
 
+        public event EventHandler RotationCompleted;
+
         public StepperMotor(
             IPwmDevice controller
             , PwmChannel controlChannel0
@@ -82,7 +84,6 @@ namespace RPi.Pwm.Motors
                         Controller.SetFull(channel, false);
                     }
                     Log.Info(m => m("Step task complete"));
-                    throw new NotFiniteNumberException();
                 }
             });
 
@@ -108,12 +109,21 @@ namespace RPi.Pwm.Motors
 
         }
 
+
+        private void FireRotationCompleted()
+        {
+            EventHandler handler = RotationCompleted;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
+
+
         private void RotationComplete(Task task)
         {
             if (task.IsFaulted)
             {
                 Log.Error("Rotation task", task.Exception);
             }
+            FireRotationCompleted();
         }
 
         private MotorDirection GetDirection(int steps)
