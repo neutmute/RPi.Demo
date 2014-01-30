@@ -82,6 +82,7 @@ namespace RPi.Pwm.Motors
                         Controller.SetFull(channel, false);
                     }
                     Log.Info(m => m("Step task complete"));
+                    throw new NotFiniteNumberException();
                 }
             });
 
@@ -96,9 +97,23 @@ namespace RPi.Pwm.Motors
                 Log.WarnFormat("Still executing prior rotation command. Command ignored.");
                 return;
             }
+            if (_rotateTask != null)
+            {
+                _rotateTask.Dispose();
+            }
+
             _rotateTask = GetRotateTask(steps);
+            _rotateTask.ContinueWith(RotationComplete);
             _rotateTask.Start();
 
+        }
+
+        private void RotationComplete(Task task)
+        {
+            if (task.IsFaulted)
+            {
+                Log.Error("Rotation task", task.Exception);
+            }
         }
 
         private MotorDirection GetDirection(int steps)

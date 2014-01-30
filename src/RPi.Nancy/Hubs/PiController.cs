@@ -76,6 +76,10 @@ namespace RPi.NancyHost.Hubs
                 Log.Info("Claw still running");
                 return;
             }
+            if (_clawTask != null)
+            {
+                _clawTask.Dispose();
+            }
             _clawTask = GetClawTask();
             _clawTask.Start();
         }
