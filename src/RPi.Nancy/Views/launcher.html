@@ -13,14 +13,14 @@
     <div data-role="collapsible" id="set1" data-collapsed="false">
         <h3>Aim</h3>
         <div data-role="controlgroup" data-type="horizontal">
-            <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left"  >Left</a>
-            <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" >Right</a>
+            <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-bind="click:rotateTurret.bind($data, 10)">Left</a>
+            <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" data-bind="click:rotateTurret.bind($data, -10)">Right</a>
         </div>
     </div>
 </div>
 
 <div class="ui-grid-a">
-    <a href="#" data-role="button" data-inline="true" data-theme="e">Fire!</a>
+    <a href="#" data-role="button" data-inline="true" data-theme="e" data-bind="click:fire">Fire!</a>
 </div>
     @EndSection
 
@@ -30,15 +30,16 @@
 
     function piRemoteViewModel() {
         var self = this;
-        this.remoteHubProxy = $.connection.remoteHub;
+        this.launcherHubProxy = $.connection.launcherHub;
         var connected = false;
         this.throttleRateLimitMs = 500;
+        this.pwmDcMotor = ko.observable();
 
         this.pwmLed = ko.observable();
 
         this.init = function () {
 
-            this.remoteHubProxy.server.ping()
+            this.launcherHubProxy.server.ping()
                 .done(this.handlePingResult)
                 .fail(this.handleError);
 
@@ -55,7 +56,21 @@
         
         this.sendDcMotor = function () {
             if (connected) {
-                self.remoteHubProxy.server.setPwm("DcMotor", self.pwmDcMotor())
+                self.launcherHubProxy.server.setMotor(self.pwmDcMotor())
+                    .fail(self.handleError);
+            }
+        };
+        
+        this.rotateTurret = function (steps) {
+            if (connected) {
+                self.launcherHubProxy.server.rotateTurret(steps)
+                    .fail(self.handleError);
+            }
+        };
+        
+        this.fire = function () {
+            if (connected) {
+                self.launcherHubProxy.server.fire()
                     .fail(self.handleError);
             }
         };
@@ -69,12 +84,9 @@
 
     $(document).ready(function () {
 
-        var remoteHubProxy = $.connection.remoteHub;
-
         var viewModel = new piRemoteViewModel();
         ko.applyBindings(viewModel);
 
-        remoteHubProxy.client.notifyPiConnected = viewModel.notifyPiConnected;
         $.connection.hub.logging = true;
         $.connection.hub.start({ transport: 'serverSentEvents' }).done(function () {
             viewModel.init();

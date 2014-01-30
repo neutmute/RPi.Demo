@@ -58,6 +58,7 @@ namespace RPi.NancyHost.Hubs
 
         public void ActivateLaunchClaw()
         {
+            Log.Info("Claw!");
             /*
              * 
             _motorController.Servo.MoveTo(70);

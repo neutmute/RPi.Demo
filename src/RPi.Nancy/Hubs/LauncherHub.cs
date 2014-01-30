@@ -11,7 +11,7 @@ using RPi.Comms;
 namespace RPi.NancyHost.Hubs
 {
 
-    public class RemoteHub : RemoteHubBase
+    public class LauncherHub : RemoteHubBase
     {
         public override Task OnConnected()
         {
