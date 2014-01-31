@@ -34,7 +34,7 @@ namespace RPi.NancyHost.Hubs
 
         public void RotateTurret(int steps)
         {
-            const int delayMs = 5;
+            const int delayMs = 3;
             Log.Info("RunStepper({0},{1})", steps, delayMs);
             var stepperCommand = new StepperCommand(steps, delayMs);
             PiController.Instance.SendStepCommand(stepperCommand);
