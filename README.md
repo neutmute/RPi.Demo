@@ -25,7 +25,7 @@ A lego ping pong launcher was constructed to showcase the motors in action.
 
 
 ## Requirements ##
-This solution expects [my fork](https://github.com/neutmute/raspberry-sharp-io) of the raspberry-sharp-io solution to be cloned into a sibling directory.
+The Visual Studio solution expects [raspberry-sharp-io](https://github.com/raspberry-sharp/raspberry-sharp-io) to be cloned into a sibling directory.
 
 ie:
 <pre>
