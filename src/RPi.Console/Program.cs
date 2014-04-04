@@ -86,7 +86,7 @@ namespace RPi.ConsoleApp
             deviceFactory.Dispose();
 
             //http://nlog-project.org/2011/10/30/using-nlog-with-mono.html
-            NLog.LogManager.Configuration = null;
+           // NLog.LogManager.Configuration = null;
         }
 
         private void RunRawPwm(IPwmDevice pwmDevice)
