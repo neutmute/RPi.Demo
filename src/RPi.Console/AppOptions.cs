@@ -15,7 +15,8 @@ namespace RPi.ConsoleApp
         Led,
         RawPwm,
         AlarmClock,
-        SignalRTest
+        SignalRTest,
+        SoundTest
     }
 
     public class ConsoleOptions
@@ -34,6 +35,7 @@ namespace RPi.ConsoleApp
         {
             OptionSet = new OptionSet {
                 { "m|mode=",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
+                { "nopcm",  v => UseFakeDevice=true},
                 { "a|alarmdate=",  v => {AlarmDate =  DateTime.Parse(v); Mode = Mode.AlarmClock;}},
                 { "t|alarmtime=",  v => {AlarmDate =  DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
                 { "h|?:", v => ShowHelp = true }
@@ -49,9 +51,13 @@ namespace RPi.ConsoleApp
 
             if (Mode == Mode.AlarmClock)
             {
-                s.AppendFormat("{0}AlarmDate={1:yyyy-MM-dd HH:mm:ss}{0}", Environment.NewLine, AlarmDate);
+                s.AppendFormat(", AlarmDate={1:yyyy-MM-dd HH:mm:ss}", Environment.NewLine, AlarmDate);
             }
 
+            if (UseFakeDevice)
+            {
+                s.AppendFormat(", UseFakeDevice=true", Environment.NewLine);
+            }
             return s.ToString();
         }
 

@@ -8,6 +8,7 @@ using Common.Logging;
 using Microsoft.AspNet.SignalR.Client;
 using Raspberry.IO.Components.Controllers.Pca9685;
 using RPi.ConsoleApp.Comms;
+using RPi.ConsoleApp.IO;
 using RPi.Pwm;
 using RPi.Pwm.Motors;
 
@@ -79,6 +80,11 @@ namespace RPi.ConsoleApp
                 case Mode.SignalRTest:
                     var signalRConnection = new SignalRConnection(motorController);
                     signalRConnection.Run();
+                    break;
+
+                case Mode.SoundTest:
+                    var soundTest = new SoundTest();
+                    soundTest.Play();
                     break;
             }
 
