@@ -34,11 +34,11 @@ namespace RPi.ConsoleApp
         public ConsoleOptions(string[] args)
         {
             OptionSet = new OptionSet {
-                { "m|mode=",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
-                { "nopcm",  v => UseFakeDevice=true},
-                { "a|alarmdate=",  v => {AlarmDate =  DateTime.Parse(v); Mode = Mode.AlarmClock;}},
-                { "t|alarmtime=",  v => {AlarmDate =  DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
-                { "h|?:", v => ShowHelp = true }
+                { "m|mode=", "Name of the mode to execute. See Mode enum",  v => Mode =(Mode) Enum.Parse(typeof(Mode), v)},
+                { "nopcm", "Do not try and connect to a real PCM device", v => UseFakeDevice=true},
+                { "a|alarmdate=", "Set alarm for future datetime", v => {AlarmDate =  DateTime.Parse(v); Mode = Mode.AlarmClock;}},
+                { "t|alarmtime=", "Set alarm for a future timespan - eg: a few seconds away", v => {AlarmDate =  DateTime.Now + TimeSpan.Parse(v); Mode = Mode.AlarmClock;}},
+                { "h|?", "Show this help", v => ShowHelp = true }
             };
             OptionSet.Parse(args);
         }
