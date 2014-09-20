@@ -49,11 +49,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.NLog20.2.2.0\lib\net40\Common.Logging.NLog20.dll</HintPath>
     </Reference>
+    <Reference Include="Kraken.Core">
+      <HintPath>..\..\packages\Kraken.Core.4.5.0.19\lib\net40\Kraken.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Client">
       <HintPath>..\..\lib\Microsoft.AspNet.SignalR.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="NDesk.Options">
-      <HintPath>..\..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
