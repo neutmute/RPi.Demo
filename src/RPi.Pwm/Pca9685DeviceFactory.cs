@@ -28,8 +28,7 @@ namespace RPi.Pwm
         public int DeviceAddress { get; set; }
 
         #endregion
-
-
+        
         #region Methods
 
         public IPwmDevice GetDevice(bool forceFakeDevice = false)
@@ -46,7 +45,7 @@ namespace RPi.Pwm
 
         private IPwmDevice GetStubDevice()
         {
-            Log.Info("This is not a pi. Giving fake device");
+            Log.Info("This is not a Raspberry Pi. Giving fake PCA9685 PWM device");
             return new PwmDeviceStub();
         }
 
