@@ -47,7 +47,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PwmController.cs" />
+    <Compile Include="PwmControlBase.cs" />
     <Compile Include="Motors\DCMotor.cs" />
     <Compile Include="Motors\PwmComponentBase.cs" />
     <Compile Include="Motors\ServoMotor.cs" />

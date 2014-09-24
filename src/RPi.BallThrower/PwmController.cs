@@ -14,9 +14,8 @@ using PwmChannel = Raspberry.IO.Components.Controllers.Pca9685.PwmChannel;
 
 namespace RPi.Pwm
 {
-    public class PwmController
+    public class PwmController : PwmControlBase
     {
-        private readonly static ILog Log = LogManager.GetCurrentClassLogger();
 
         public ServoMotor Servo { get; private set; }
 
@@ -25,23 +24,22 @@ namespace RPi.Pwm
 
         public StepperMotor Stepper { get; private set; }
 
-        private readonly IPwmDevice _pwmDevice;
 
         public event EventHandler OnStepperCompleted;
 
 
         public PwmController(IPwmDevice pwmDevice)
+            : base(pwmDevice)
         {
-            _pwmDevice = pwmDevice;
         }
 
         public void Init()
         {
-            Servo = new ServoMotor(_pwmDevice, PwmChannel.C1, 150, 600);
-            DcMotor = new DcMotor(_pwmDevice, PwmChannel.C4, PwmChannel.C5);
-        
+            Servo = new ServoMotor(PwmDevice, PwmChannel.C1, 150, 600);
+            DcMotor = new DcMotor(PwmDevice, PwmChannel.C4, PwmChannel.C5);
+
             Stepper = new StepperMotor(
-                _pwmDevice
+                PwmDevice
                 , PwmChannel.C11
                 , PwmChannel.C10
                 , PwmChannel.C9
@@ -49,9 +47,9 @@ namespace RPi.Pwm
 
             Stepper.RotationCompleted += OnStepperCompleted;
 
-            Led0 = new Led(_pwmDevice, PwmChannel.C0);
+            Led0 = new Led(PwmDevice, PwmChannel.C0);
         }
-        
+
         public void AllStop()
         {
             Log.Info("All stop");

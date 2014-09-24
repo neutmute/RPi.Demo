@@ -87,6 +87,10 @@
       <Project>{281c71ed-c36d-408e-8baa-75c381dc17e7}</Project>
       <Name>Raspberry.IO.GeneralPurpose</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RPi.BallThrower\RPi.BallThrower.csproj">
+      <Project>{fe0e920f-57bf-4894-8105-6871ccd65f04}</Project>
+      <Name>RPi.BallThrower</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RPi.Comms\RPi.Comms.csproj">
       <Project>{aeecae23-d46e-4f64-91b3-c0b50bc2483e}</Project>
       <Name>RPi.Comms</Name>
