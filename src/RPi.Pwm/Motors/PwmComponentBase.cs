@@ -1,4 +1,5 @@
-﻿using Common.Logging;
+﻿using System;
+using Common.Logging;
 using Raspberry.IO.Components.Controllers.Pca9685;
 
 
@@ -18,7 +19,7 @@ namespace RPi.Pwm.Motors
             Controller = controller;
         }
 
-        protected int GetCoercedPercent(int percent)
+        protected decimal GetCoercedPercent(decimal percent)
         {
             if (percent > 100)
             {
@@ -27,16 +28,16 @@ namespace RPi.Pwm.Motors
 
             if (percent < 0)
             {
-                percent = 0;
+                percent = decimal.Zero;
             }
             return percent;
         }
 
-        protected int GetPercentAsPwm(int percent)
+        protected int GetPercentAsPwm(Decimal percent)
         {
             var coercedPercent = GetCoercedPercent(percent);
-            var speedInPwm = coercedPercent * PwmMaximum / 100;
-            return speedInPwm;
+            var speedInPwm = (coercedPercent * PwmMaximum) / 100;
+            return Convert.ToInt32(speedInPwm);
         }
     }
 }
