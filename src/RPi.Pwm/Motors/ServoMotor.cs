@@ -6,11 +6,19 @@ using Raspberry.IO.Components.Controllers.Pca9685;
 
 namespace RPi.Pwm.Motors
 {
-    public class ServoMotor : PwmComponentBase
+    public interface IServoMotor
+    {
+        int CurrentPercent { get; }
+        void MoveTo(int percent);
+    }
+
+    public class ServoMotor : PwmComponentBase, IServoMotor
     {
         private int MaximumPosition { get; set; }
 
         private int MinimumPosition { get; set; }
+
+        public int CurrentPercent { get; private set; }
 
         private PwmChannel Channel { get; set; }
 
@@ -30,6 +38,8 @@ namespace RPi.Pwm.Motors
             var pulseValue = MinimumPosition + (gap*percent/100);
             Log.Debug(m=>m("Servo.{0} => {1}% (pulse={2})", Channel, percent, pulseValue));
             Controller.SetPwm(Channel, 0, pulseValue);
+            CurrentPercent = percent;
         }
+        
     }
 }
