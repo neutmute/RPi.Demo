@@ -54,7 +54,14 @@ namespace RPi.Pwm
             PwmFrequency = 60;
             DeviceAddress = 0x40;
 
-            _i2cDriver = new I2cDriver(SdaPin.ToProcessor(), SclPin.ToProcessor());
+            try
+            {
+                _i2cDriver = new I2cDriver(SdaPin.ToProcessor(), SclPin.ToProcessor());
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to initialise i2c driver. Did you forget sudo?", e);
+            }
 
             Log.Info("Creating device...");
             var device = Pca9685Connection.Create(_i2cDriver.Connect(DeviceAddress));
