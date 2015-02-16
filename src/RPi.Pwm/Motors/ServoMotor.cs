@@ -9,6 +9,7 @@ namespace RPi.Pwm.Motors
     public interface IServoMotor
     {
         decimal CurrentPercent { get; }
+        int CurrentPwm { get; }
         void MoveTo(decimal percent);
     }
 
@@ -19,6 +20,7 @@ namespace RPi.Pwm.Motors
         private int MinimumPosition { get; set; }
 
         public decimal CurrentPercent { get; private set; }
+        public int CurrentPwm { get; private set; }
 
         private PwmChannel Channel { get; set; }
 
@@ -35,9 +37,9 @@ namespace RPi.Pwm.Motors
             percent = GetCoercedPercent(percent);
 
             var gap = MaximumPosition -  MinimumPosition;
-            var pulseValue = MinimumPosition + (gap*percent/100);
-            Log.Debug(m=>m("Servo.{0} => {1}% (pulse={2})", Channel, percent, pulseValue));
-            Controller.SetPwm(Channel, 0, (int) pulseValue);
+            CurrentPwm = (int) (MinimumPosition + (gap * percent / 100));
+            Log.Debug(m => m("Servo.{0} => {1}% (pulse={2})", Channel, percent, CurrentPwm));
+            Controller.SetPwm(Channel, 0, CurrentPwm);
             CurrentPercent = percent;
         }
 
