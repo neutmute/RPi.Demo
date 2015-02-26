@@ -59,4 +59,17 @@ see:
     rpi.nancy/rpi-nancy.exe
 
 
-A video of it all working is on [youtube](http://youtu.be/s_ZQtiupyzE).
+A video the ping pong launcher can be seen [here](http://youtu.be/s_ZQtiupyzE).
+
+# Later Projects#
+Other projects that make use of this code base...
+##Alarm Clock ##
+An [alarm clock](https://spacerazor.wordpress.com/2014/10/01/raspberry-pi-lego-alarm-clock/). The source code is contained in this repo. 
+
+![Alarm Clock](https://raw.githubusercontent.com/neutmute/RPi.Demo/master/src/RPi.Slides/Content/slides/alarmClock.jpg)
+
+## Lego Marble Sorter ##
+A Lego [marble pump & sorter](https://spacerazor.wordpress.com/2014/10/05/raspberry-pi-lego-ball-machine/) using OpenCV.
+The source code in in another repo but references projects in this repo.
+
+![marble pump](https://raw.githubusercontent.com/neutmute/RPi.Demo/master/src/RPi.Slides/Content/slides/legoMarbleSorter.jpg)
