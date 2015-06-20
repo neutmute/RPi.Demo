@@ -6,6 +6,7 @@ using Common.Logging;
 using Raspberry.IO.Components.Controllers.Pca9685;
 using Raspberry.IO.GeneralPurpose;
 using Raspberry.IO.InterIntegratedCircuit;
+using UnitsNet;
 
 namespace RPi.Pwm
 {
@@ -24,7 +25,7 @@ namespace RPi.Pwm
         #region Properties
 
         public bool IsConnected { get; set; }
-        public int PwmFrequency { get; set; }
+        public Frequency PwmFrequency { get; set; }
         public int DeviceAddress { get; set; }
 
         #endregion
@@ -51,7 +52,7 @@ namespace RPi.Pwm
 
         private IPwmDevice GetRealDevice()
         {
-            PwmFrequency = 60;
+            PwmFrequency = new Frequency(60);
             DeviceAddress = 0x40;
 
             try
@@ -64,7 +65,7 @@ namespace RPi.Pwm
             }
 
             Log.Info("Creating device...");
-            var device = Pca9685Connection.Create(_i2cDriver.Connect(DeviceAddress));
+            var device = new Pca9685Connection(_i2cDriver.Connect(DeviceAddress));
             Log.Info("Setting frequency...");
             device.SetPwmUpdateRate(PwmFrequency); //                        # Set frequency to 60 Hz
 
