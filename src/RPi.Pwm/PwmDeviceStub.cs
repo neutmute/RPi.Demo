@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Common.Logging;
 using Raspberry.IO.Components.Controllers.Pca9685;
+using UnitsNet;
 
 namespace RPi.Pwm
 {
@@ -22,7 +23,10 @@ namespace RPi.Pwm
 
         public void SetPwmUpdateRate(int frequencyHz)
         {
-            Log.Debug(m => m("Stub:SetPwmUpdateRate({0})", frequencyHz));
+        }
+        public void SetPwmUpdateRate(Frequency frequency)
+        {
+            Log.DebugFormat("Stub:SetPwmUpdateRate({0})", frequency);
         }
 
         public void SetPwm(PwmChannel channel, int on, int off)
