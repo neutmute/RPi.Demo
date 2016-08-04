@@ -10,7 +10,7 @@ namespace RPi.Pwm
 {
     public class PwmDeviceStub : IPwmDevice
     {
-        private readonly static ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly static ILog Log = LogManager.GetLogger< PwmDeviceStub>();
 
         public List<PwmChannel> LogChannels { get; private set; }
 

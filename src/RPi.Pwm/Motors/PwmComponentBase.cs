@@ -8,7 +8,7 @@ namespace RPi.Pwm.Motors
     public abstract class PwmComponentBase
     {
 
-        private readonly static ILog _Log = LogManager.GetCurrentClassLogger();
+        private readonly static ILog _Log = LogManager.GetLogger< PwmComponentBase>();
         protected const int PwmMaximum = 4095;
 
         protected IPwmDevice Controller {get; private set;}

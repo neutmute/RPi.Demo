@@ -17,7 +17,7 @@ namespace RPi.Pwm
         private bool _disposed;
         public const ConnectorPin SdaPin = ConnectorPin.P1Pin03;
         public const ConnectorPin SclPin = ConnectorPin.P1Pin05;
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetLogger< Pca9685DeviceFactory>();
         private I2cDriver _i2cDriver;
 
         #endregion
