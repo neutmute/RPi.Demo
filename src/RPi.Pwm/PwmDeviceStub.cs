@@ -20,10 +20,7 @@ namespace RPi.Pwm
             var oneToEleven = from n in Enumerable.Range(0, 11) select (PwmChannel) Enum.ToObject(typeof(PwmChannel), n);
             LogChannels.AddRange(oneToEleven);
         }
-
-        public void SetPwmUpdateRate(int frequencyHz)
-        {
-        }
+        
         public void SetPwmUpdateRate(Frequency frequency)
         {
             Log.DebugFormat("Stub:SetPwmUpdateRate({0})", frequency);
