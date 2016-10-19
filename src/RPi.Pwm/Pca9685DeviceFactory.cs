@@ -57,14 +57,19 @@ namespace RPi.Pwm
 
             try
             {
-                _i2cDriver = new I2cDriver(SdaPin.ToProcessor(), SclPin.ToProcessor());
+                Log.Info("Creating pins");
+                var sdaPin = SdaPin.ToProcessor();
+                var sclPin = SclPin.ToProcessor();
+
+                Log.Info("Creating i2cDriver");
+                _i2cDriver = new I2cDriver(sdaPin, sclPin);
             }
             catch (Exception e)
             {
                 Log.Error("Failed to initialise i2c driver. Did you forget sudo?", e);
             }
 
-            Log.Info("Creating device...");
+            Log.Info("Creating real device...");
             var device = new Pca9685Connection(_i2cDriver.Connect(DeviceAddress));
             Log.Info("Setting frequency...");
             device.SetPwmUpdateRate(PwmFrequency); //                        # Set frequency to 60 Hz
