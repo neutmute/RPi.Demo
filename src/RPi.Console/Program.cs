@@ -84,7 +84,11 @@ namespace RPi.ConsoleApp
 
                 case Mode.SoundTest:
                     var soundTest = new SoundTest();
-                    soundTest.Play();
+                    Log.Info("Aplay...");
+                    soundTest.PlayWithAPlay();
+                    
+                    soundTest.PlayWithSoundPlayer();
+                    soundTest.PlayWithSoundPlayerAsync();
                     break;
             }
 

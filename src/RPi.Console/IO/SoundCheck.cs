@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Media;
+using System.Threading;
 using Common.Logging;
 using Kraken.Core;
 
@@ -28,19 +29,37 @@ namespace RPi.ConsoleApp.IO
         /// <summary>
         /// if run as sudo, the SSH session hangs and eed to start a new one. 
         /// </summary>
-        private void PlayWithSoundPlayer()
+        public void PlayWithSoundPlayer()
         {
 
-            using (var file = new FileStream(WavFile, FileMode.Open, FileAccess.Read, FileShare.Read))
+            //using (var file = new FileStream(WavFile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                Log.Info(m => m("Playing {0}", WavFile));
-                var player = new SoundPlayer(file);
+                Log.Info(m => m("SoundPlayer Sync: {0}", WavFile));
+                var player = new SoundPlayer();
+                player.SoundLocation = WavFile;
                 player.PlaySync();
-                Log.Info("done");
             }
         }
 
-        public void Play()
+        public void PlayWithSoundPlayerAsync()
+        {
+
+            Log.Info(m => m("SoundPlayer Async: {0}", WavFile));
+            var player = new SoundPlayer();
+            player.SoundLocation = WavFile;
+            //player.LoadCompleted += (s, e) => { Log.Info("Load completed, playing");  };
+            //player.LoadAsync();
+            player.Play();
+            Log.Info("done");
+            Thread.Sleep(3000);
+        }
+
+        private void Player_LoadCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PlayWithAPlay()
         {
             var process = new AplayProcess();
             process.SoundFile = WavFile;
